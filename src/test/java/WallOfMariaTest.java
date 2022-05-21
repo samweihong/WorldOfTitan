@@ -1,10 +1,13 @@
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class WallOfMariaTest {
 
@@ -39,5 +42,26 @@ class WallOfMariaTest {
             return null;
         }
         return data;
+    }
+
+    @Test
+    void testReadInput() {
+        String inputText = """
+                4
+                3 6 9
+                2 5 8 9
+                1 4 10
+                5 7 9
+                """;
+        InputStream input = new ByteArrayInputStream(inputText.getBytes());
+        System.setIn(input);
+        List<List<Integer>> actualList = WallOfMaria.readInput();
+
+        int[][] a = {{3,6,9},{2,5,8,9},{1,4,10},{5,7,9}};
+        List<List<Integer>> expectedList = Arrays.stream(a).map(e -> Arrays.stream(e)
+                                                                    .boxed()
+                                                                    .toList())
+                                                            .toList();
+        assertEquals(expectedList, actualList);
     }
 }
