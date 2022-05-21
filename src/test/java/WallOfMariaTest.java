@@ -12,6 +12,9 @@ class WallOfMariaTest {
     void testGetWeakestPoints() {
         Queue<List<List<Integer>>> data = getTestData();
         assertNotNull(data);
+
+        assertEquals(List.of(9), WallOfMaria.getWeakestPoints(data.poll()));
+        assertEquals(List.of(9), WallOfMaria.getWeakestPoints(data.poll()));
     }
 
     private Queue<List<List<Integer>>> getTestData() {
