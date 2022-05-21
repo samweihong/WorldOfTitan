@@ -17,6 +17,7 @@ public class WallOfMaria {
         for (Map.Entry<Integer, Integer> entry : countMap.entrySet())
             if (entry.getValue() == max)
                 res.add(entry.getKey());
+        Collections.sort(res);
         return res;
     }
 

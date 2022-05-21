@@ -6,8 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class WallOfMariaTest {
 
@@ -17,7 +16,10 @@ class WallOfMariaTest {
         assertNotNull(data);
 
         assertEquals(List.of(9), WallOfMaria.getWeakestPoints(data.poll()));
-        assertEquals(List.of(9), WallOfMaria.getWeakestPoints(data.poll()));
+        assertEquals(Arrays.asList(20, 50), WallOfMaria.getWeakestPoints(data.poll()));
+        assertEquals(List.of(11), WallOfMaria.getWeakestPoints(data.poll()));
+        assertEquals(Arrays.asList(5, 10, 15), WallOfMaria.getWeakestPoints(data.poll()));
+        assertTrue(data.isEmpty());
     }
 
     private Queue<List<List<Integer>>> getTestData() {
