@@ -4,11 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CharacterTest {
 
-    Character character;
-
-    public CharacterTest() {
-        this.character = new Character("abc",1,2,3,4,5,6,7);
-    }
+    Character character = new Character("abc",1,2,3,4,5,6,7);
 
     @Test
     void getHeight() {
