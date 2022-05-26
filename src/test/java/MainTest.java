@@ -15,8 +15,20 @@ class MainTest {
                 "\nStrength: " + character.getStrength() +
                 "\nAgility: " + character.getAgility() +
                 "\nIntelligence: " + character.getIntelligence() +
-                "\nCoordination: 8" + character.getCoordination() +
+                "\nCoordination: " + character.getCoordination() +
                 "\nLeadership: " + character.getLeadership(), Main.storeCharacterInformation());
+    }
+
+    @Test
+    void testLoadingCharacterInformation() {
+        assertEquals("Name: " + character.getName() +
+                "\nHeight: " + character.getHeight() + "cm" +
+                "\nWeight: " + character.getWeight() + "kg" +
+                "\nStrength: " + character.getStrength() +
+                "\nAgility: " + character.getAgility() +
+                "\nIntelligence: " + character.getIntelligence() +
+                "\nCoordination: " + character.getCoordination() +
+                "\nLeadership: " + character.getLeadership(), Main.loadCharacterInformation());
     }
 
     @Test
