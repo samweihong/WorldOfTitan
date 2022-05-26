@@ -1,75 +1,91 @@
 public class HashMap<K, V> {
-    private Entry<K, V> head;
-    private int size = 0;
+    private Entry<K, V>[] buckets; // declare an array of entry;
+    private int size = 0; //initial size is 0
 
-    public void put(K key, V value){
-        Entry<K, V> newNode = new Entry<>(key, value, null); //initial a new node
-        if(head == null){
-            head = newNode; //if head is null, assign newNode to head
-            size++; //increase size
-        }
-        else{
-            Entry<K, V> current = head; 
-            Entry<K, V> prev = head;
+    public HashMap(){
+        buckets = new Entry[2]; // assign initial size of 2
+    }
+
+    private int getIndex(K key){
+        return key.hashCode();
+    }
+
+    private void resize(){
+        Entry<K, V>[] previousHashMap = buckets;
+        buckets = new Entry[size * 2]; //double the size of array
+        size = 0; //reset the size because put() method will increase the size
+
+        for(int i = 0; i < previousHashMap.length; i++){ //loop through existing hash
+            Entry<K, V> current = previousHashMap[i];
+            if(current == null) continue;
             while(current != null){
-                if(current.key.equals(key)){ //if the key already exist, just change the value instead of creating a new node
-                    current.value = value;
-                    return;
-                }
-                prev = current;
+                put(current.key, current.value);
                 current = current.next;
             }
-            prev.next = newNode; //if the key is not found, insert the node as the last node
-            size++; //increase the size
         }
     }
 
-    public V get(K key){
-        Entry<K, V> current = head; 
+    public void put(K key, V value){
+        if(size >= buckets.length){
+            resize(); //if the size is larger than or equal to length of hashmap array, we will need to increase the size of the array
+        }
+        Entry<K, V> newEntry = new Entry<>(key, value, null);
+        int index = getIndex(key) % buckets.length; //get the hash
+
+        if(buckets[index] == null){
+            buckets[index] = newEntry;
+            size++;
+            return;
+        }
+        Entry<K, V> current = buckets[index];
+        Entry<K, V> prev = buckets[index];
         while(current != null){
-            if(current.key.equals(key)){ //if the key is found, return it's respective value
+            if(current.key.equals(key)){
+                current.value = value;
+                return;
+            }
+            current = current.next;
+        }
+        prev.next = newEntry;
+        size++;
+    }
+
+    public V get(K key){
+        int index = getIndex(key) % buckets.length;
+        Entry<K, V> current = buckets[index];
+
+        if(current == null){
+            return null;
+        }
+
+        while(current != null){
+            if(current.key.equals(key)){
                 return current.value;
             }
             current = current.next;
         }
-        return null; //if the key is not found, return null
+        return null;
     }
 
     public V getOrDefault(K key, V defaultValue){
-        V current = get(key);
-        if(current == null){
-            return defaultValue;
-        }
-        return current;
-    }
-    
-    public boolean containsKey(K key){
-        Entry<K, V> current = head;
-        while(current != null){
-            if(current.key.equals(key)){
-                return true;
-            }
-            current = current.next;
-        }
-        return false;
+        V value = get(key);
+        if(value == null) return defaultValue;
+        return value;
     }
 
     public Entry<K, V>[] entrySet(){
-        Entry<K, V>[] set = new Entry[this.size];
-        Entry<K, V> current = head;
+        Entry<K, V>[] set = new Entry[size];
         int i = 0;
-        while(current != null){
-            set[i++] = current;
-            current = current.next;
+        for(Entry<K, V> entry : buckets){
+            while(entry != null){
+                set[i++] = entry;
+                entry = entry.next;
+            }
         }
         return set;
     }
 
     public int size(){
-        return this.size;
+        return size;
     }
-    
-    
-    
-    //getKey
 }
