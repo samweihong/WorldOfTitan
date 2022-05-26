@@ -2,15 +2,6 @@ import java.util.Scanner;
 import java.lang.StringBuilder;
 
 public class WordConverter {
-    /*public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter Marley sentence: ");
-        String input = sc.nextLine();
-        System.out.println(convertWord(input));
-        //oh(ldchc$ebdccd$rl)
-        //rsgc(qqd^i$tkz)$ko$^udzhd,(rld$sgk^z$)$^gpssld
-        //ukgc$rd(vsq$gh$zshrqkg$gwkzsml)h$dbeszudl
-    }*/
 
     public static String convertWord(String input){
         HashMap<Character, Character> map = new HashMap<>();

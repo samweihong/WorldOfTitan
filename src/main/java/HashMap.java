@@ -1,27 +1,16 @@
 public class HashMap<K, V> {
-    private class Node<K, V> {
-        K key;
-        V value;
-        Node<K, V> next;
-    
-        public Node(K key, V value, Node<K, V> next){
-            this.key = key;
-            this.value = value;
-            this.next = next;
-        }
-    }
-
-    private Node<K, V> head;
-    //private int size = 0;
+    private Entry<K, V> head;
+    private int size = 0;
 
     public void put(K key, V value){
-        Node<K, V> newNode = new Node<>(key, value, null); //initial a new node
+        Entry<K, V> newNode = new Entry<>(key, value, null); //initial a new node
         if(head == null){
             head = newNode; //if head is null, assign newNode to head
+            size++; //increase size
         }
         else{
-            Node<K, V> current = head; 
-            Node<K, V> prev = head;
+            Entry<K, V> current = head; 
+            Entry<K, V> prev = head;
             while(current != null){
                 if(current.key.equals(key)){ //if the key already exist, just change the value instead of creating a new node
                     current.value = value;
@@ -31,11 +20,12 @@ public class HashMap<K, V> {
                 current = current.next;
             }
             prev.next = newNode; //if the key is not found, insert the node as the last node
+            size++; //increase the size
         }
     }
 
     public V get(K key){
-        Node<K, V> current = head; 
+        Entry<K, V> current = head; 
         while(current != null){
             if(current.key.equals(key)){ //if the key is found, return it's respective value
                 return current.value;
@@ -45,8 +35,16 @@ public class HashMap<K, V> {
         return null; //if the key is not found, return null
     }
 
-    /*public boolean containsKey(K key){
-        Node<K, V> current = head;
+    public V getOrDefault(K key, V defaultValue){
+        V current = get(key);
+        if(current == null){
+            return defaultValue;
+        }
+        return current;
+    }
+    
+    public boolean containsKey(K key){
+        Entry<K, V> current = head;
         while(current != null){
             if(current.key.equals(key)){
                 return true;
@@ -54,5 +52,24 @@ public class HashMap<K, V> {
             current = current.next;
         }
         return false;
-    }*/
+    }
+
+    public Entry<K, V>[] entrySet(){
+        Entry<K, V>[] set = new Entry[this.size];
+        Entry<K, V> current = head;
+        int i = 0;
+        while(current != null){
+            set[i++] = current;
+            current = current.next;
+        }
+        return set;
+    }
+
+    public int size(){
+        return this.size;
+    }
+    
+    
+    
+    //getKey
 }
