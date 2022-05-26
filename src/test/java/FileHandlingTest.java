@@ -6,10 +6,6 @@ class FileHandlingTest {
 
     FileHandling fileHandling = new FileHandling();
 
-    public FileHandlingTest() {
-        this.fileHandling = new FileHandling();
-    }
-
     @Test
     void writeInFile() {
         Character cha = new Character("Test", 185, 95, 9, 7, 7, 10, 8);
