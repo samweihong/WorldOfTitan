@@ -26,9 +26,6 @@ public class HashMap<K, V> {
     }
 
     public void put(K key, V value){
-        if(size >= buckets.length){
-            resize(); //if the size is larger than or equal to length of hashmap array, we will need to increase the size of the array
-        }
         Entry<K, V> newEntry = new Entry<>(key, value, null);
         int index = getIndex(key) % buckets.length; //get the hash
 
@@ -49,6 +46,20 @@ public class HashMap<K, V> {
         }
         prev.next = newEntry;
         size++;
+
+        if ((1.0 * size) / buckets.length >= 0.7) {
+            Entry<K, V>[] temp = buckets;
+            buckets = new Entry[temp.length * 2];
+            size = 0;
+            for (int i = 0; i < temp.length; i++){
+                Entry<K, V> entry = temp[i];
+                if(entry == null) continue;
+                while(entry != null){
+                    put(entry.key, entry.value);
+                    entry = entry.next;
+                }
+            }       
+        }
     }
 
     public V get(K key){
