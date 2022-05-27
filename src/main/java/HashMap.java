@@ -44,6 +44,7 @@ public class HashMap<K, V> {
                 current.value = value;
                 return;
             }
+            prev = current;
             current = current.next;
         }
         prev.next = newEntry;
@@ -68,9 +69,20 @@ public class HashMap<K, V> {
     }
 
     public V getOrDefault(K key, V defaultValue){
-        V value = get(key);
-        if(value == null) return defaultValue;
-        return value;
+        int index = getIndex(key) % buckets.length;
+        Entry<K, V> current = buckets[index];
+
+        if(current == null){
+            return defaultValue;
+        }
+
+        while(current != null){
+            if(current.key.equals(key)){
+                return current.value;
+            }
+            current = current.next;
+        }
+        return defaultValue;
     }
 
     public Entry<K, V>[] entrySet(){
