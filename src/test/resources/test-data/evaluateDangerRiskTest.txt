@@ -23,4 +23,4 @@ Normal Titan (30m, 0 legs, 30ms, Repeated pattern, Cannot climb)
 3
 Normal Titan (30m, 4 legs, 30ms, Not repeated pattern, Can climb)
 Normal Titan (0m, 0 legs, 0ms, Normal pattern, Cannot climb)
-Normal Titan(25m, 2 legs, 15ms, Repeated pattern, Can climb)
+Normal Titan (25m, 2 legs, 15ms, Repeated pattern, Can climb)

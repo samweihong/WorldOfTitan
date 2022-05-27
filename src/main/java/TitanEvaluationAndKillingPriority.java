@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 public class TitanEvaluationAndKillingPriority {
 
@@ -46,54 +49,62 @@ public class TitanEvaluationAndKillingPriority {
 
     }
 
-    public static int evaluateDangerRisk(String titan){
+    public static List<Integer> evaluateDangerRisk(List<String> titans){
 
-        String titanType = titan.split(" ")[0];
-        if(titanType.equals("Normal")){
-            // Normal Titan (25m, 4 legs, 15ms, Repeated pattern, Can climb)
+        List<Integer> dangerRisks = new ArrayList<>();
+        for(int i = 0; i < titans.size(); i++){
 
-            // Getting data from String input
-            String[] attributes = titan.split(" ");
-            int height = Integer.parseInt(attributes[2].substring(1, attributes[2].length() - 2));
-            int legs = Integer.parseInt(attributes[3]);
-            int speed = Integer.parseInt(attributes[5].substring(0, attributes[5].length() - 3));
+            String titan = titans.get(i);
+            String titanType = titan.split(" ")[0];
+            if(titanType.equals("Normal")){
+                // Normal Titan (25m, 4 legs, 15ms, Repeated pattern, Can climb)
 
-            String walkingPattern;
-            if(attributes.length == 11) walkingPattern = "Not repeated";
-            else if(attributes[6].equalsIgnoreCase("Repeated")) walkingPattern = "Repeated";
-            else walkingPattern = "Normal";
+                // Getting data from String input
+                String[] attributes = titan.split(" ");
+                int height = Integer.parseInt(attributes[2].substring(1, attributes[2].length() - 2));
+                int legs = Integer.parseInt(attributes[3]);
+                int speed = Integer.parseInt(attributes[5].substring(0, attributes[5].length() - 3));
 
-            boolean canClimb = true;
-            if(attributes[attributes.length - 2].equals("Cannot")) canClimb = false;
+                String walkingPattern;
+                if(attributes.length == 11) walkingPattern = "Not repeated";
+                else if(attributes[6].equalsIgnoreCase("Repeated")) walkingPattern = "Repeated";
+                else walkingPattern = "Normal";
+
+                boolean canClimb = true;
+                if(attributes[attributes.length - 2].equals("Cannot")) canClimb = false;
 
 
-            // Calculating danger risk based on collected data
-            int risk = 0;
+                // Calculating danger risk based on collected data
+                int risk = 0;
 
-            if(height > 20) risk += 3;
-            else if(height > 10) risk += 2;
-            else risk++;
+                if(height > 20) risk += 3;
+                else if(height > 10) risk += 2;
+                else risk++;
 
-            if(legs == 4) risk += 3;
-            else if(legs == 2) risk += 2;
-            else if(legs == 0) risk++;
+                if(legs == 4) risk += 3;
+                else if(legs == 2) risk += 2;
+                else if(legs == 0) risk++;
 
-            if(speed > 20) risk += 3;
-            else if(speed > 10) risk += 2;
-            else risk++;
+                if(speed > 20) risk += 3;
+                else if(speed > 10) risk += 2;
+                else risk++;
 
-            if(walkingPattern.equals("Not repeated")) risk += 3;
-            else if(walkingPattern.equals("Repeated")) risk += 2;
-            else risk++;
+                if(walkingPattern.equals("Not repeated")) risk += 3;
+                else if(walkingPattern.equals("Repeated")) risk += 2;
+                else risk++;
 
-            if(canClimb) risk += 3;
-            else risk++;
+                if(canClimb) risk += 3;
+                else risk++;
 
-            return risk;
+                dangerRisks.add(risk);
+
+            }
+            else if(titanType.equals("Abnormal")) dangerRisks.add(15);
+            else dangerRisks.add(19);
 
         }
-        else if(titanType.equals("Abnormal")) return 15;
-        else return 19;
+
+        return dangerRisks;
 
     }
 
