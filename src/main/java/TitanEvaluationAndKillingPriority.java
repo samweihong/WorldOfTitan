@@ -45,7 +45,18 @@ public class TitanEvaluationAndKillingPriority {
 
         }
         else if(titan == 2) return "Abnormal Titan";
-        else return "Nine Titans";
+        else {
+            int nineTitans = random.nextInt(1, 10);
+            if(nineTitans == 1) return "Founding Titan";
+            else if(nineTitans == 2) return "Armored Titan";
+            else if(nineTitans == 3) return "Attack Titan";
+            else if(nineTitans == 4) return "Beast Titan";
+            else if(nineTitans == 5) return "Cart Titan";
+            else if(nineTitans == 6) return "Colossus Titan";
+            else if(nineTitans == 7) return "Female Titan";
+            else if(nineTitans == 8) return "Jaw Titan";
+            else if(nineTitans == 9) return "War Hammer Titan";
+        }
 
     }
 
@@ -100,7 +111,17 @@ public class TitanEvaluationAndKillingPriority {
 
             }
             else if(titanType.equals("Abnormal")) dangerRisks.add(15);
-            else dangerRisks.add(19);
+            else if(
+                titanType.equals("Founding") ||
+                titanType.equals("Armored") ||
+                titanType.equals("Attack") ||
+                titanType.equals("Beast") ||
+                titanType.equals("Cart") ||
+                titanType.equals("Colossus") ||
+                titanType.equals("Female") ||
+                titanType.equals("Jaw") ||
+                titanType.equals("War")
+            )dangerRisks.add(19);
 
         }
 
