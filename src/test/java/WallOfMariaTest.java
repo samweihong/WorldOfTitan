@@ -1,3 +1,4 @@
+import logic.WallOfMaria;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
