@@ -17,12 +17,17 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
-    public static String killPriority(List<Titan> titans){
+    public static PriorityQueue<Titan> createKillQueue(List<Titan> titans){
 
         PriorityQueue<Titan> killQueue = new PriorityQueue<>();
         for(int i = 0; i < titans.size(); i++){
             killQueue.enqueue(titans.get(i));
         }
+        return killQueue;
+
+    }
+
+    public static String killPriority(PriorityQueue<Titan> killQueue){
 
         StringBuilder killSequence = new StringBuilder();
         for(int i = 0; i < killQueue.getSize(); i++){
