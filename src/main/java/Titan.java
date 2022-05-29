@@ -1,8 +1,10 @@
 import java.util.Random;
 
-public class Titan {
+public class Titan implements Comparable<Titan> {
 
     private String titan;
+    private int risk;
+    private int index;
 
     public Titan(String titan){ this.titan = titan; }
     // generate Titan
@@ -60,9 +62,9 @@ public class Titan {
         }
     }
 
-    public int getRisk(String titan){
+    public int evaluateRisk(String titan){
         String titanType = titan.split(" ")[0];
-        if(titanType.equals("Abnormal")) return 15;
+        if(titanType.equals("Abnormal")) risk = 15;
         else if(
             titanType.equals("Founding") ||
             titanType.equals("Armored") ||
@@ -73,7 +75,7 @@ public class Titan {
             titanType.equals("Female") ||
             titanType.equals("Jaw") ||
             titanType.equals("War")
-        ) return 19;
+        ) risk = 19;
         else if(titanType.equals("Normal")){
             // Getting data from String input
             String[] attributes = titan.split(" ");
@@ -91,8 +93,6 @@ public class Titan {
 
 
             // Calculating danger risk based on collected data
-            int risk = 0;
-
             if(height > 20) risk += 3;
             else if(height > 10) risk += 2;
             else risk++;
@@ -114,8 +114,12 @@ public class Titan {
 
             return risk;
         }
-        return -1;
+        return risk;
     }
+
+    public int getRisk() { return risk; }
+    public int getIndex() { return index; }
+    public void setIndex(int index) { this.index = index; }
 
     @Override
     public String toString(){ return titan; }
@@ -124,4 +128,10 @@ public class Titan {
         return new Titan(titan);
     }
 
+    @Override
+    public int compareTo(Titan o) {
+        if(this.getRisk() > o.getRisk()) return -1;
+        else if(this.getRisk() == o.getRisk()) return 0;
+        else return 1;
+    }
 }

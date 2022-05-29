@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
-public class TitanEvaluationAndKillingPriority {
+public class TitanEvaluationAndKillingPriority{
 
     public static List<Integer> evaluateDangerRisk(List<Titan> titans){
 
@@ -10,12 +8,29 @@ public class TitanEvaluationAndKillingPriority {
         for(int i = 0; i < titans.size(); i++){
 
             Titan titan = titans.get(i);
-            int risk = titan.getRisk(titan.toString());
+            int risk = titan.evaluateRisk(titan.toString());
             dangerRisks.add(risk);
 
         }
 
         return dangerRisks;
+
+    }
+
+    public static String killPriority(List<Titan> titans){
+
+        PriorityQueue<Titan> killQueue = new PriorityQueue<>();
+        for(int i = 0; i < titans.size(); i++){
+            killQueue.enqueue(titans.get(i));
+        }
+
+        StringBuilder killSequence = new StringBuilder();
+        for(int i = 0; i < killQueue.getSize(); i++){
+            killSequence.append("Titan ").append(killQueue.getElement(i).getIndex()).append(" --> ");
+        }
+        killSequence.delete(killSequence.length() - 4, killSequence.length());
+
+        return killSequence.toString();
 
     }
 
@@ -28,11 +43,14 @@ public class TitanEvaluationAndKillingPriority {
 
         System.out.println();
         List<Integer> dangerRiskList = new ArrayList<>();
+        List<Titan> titanList = new ArrayList<>();
         System.out.printf("Generating %d Titans ...\n", noOfTitans);
         for(int i = 1; i <= noOfTitans; i++){
             Titan titan = new Titan();
+            titan.setIndex(i);
+            titanList.add(titan);
             System.out.printf("Titan %d: %s\n", i, titan);
-            dangerRiskList.add(titan.getRisk(titan.toString()));
+            dangerRiskList.add(titan.evaluateRisk(titan.toString()));
         }
 
         System.out.println();
@@ -43,8 +61,12 @@ public class TitanEvaluationAndKillingPriority {
 
         System.out.println();
         System.out.print("Sequence to be killed: ");
+        System.out.println(killPriority(titanList));
+
         System.out.print("Total distance moved: ");
 
     }
 
+
 }
+
