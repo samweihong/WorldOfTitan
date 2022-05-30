@@ -1,3 +1,5 @@
+package logic;
+
 import java.lang.StringBuilder;
 
 public class WordConverter {

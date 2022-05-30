@@ -1,3 +1,5 @@
+package logic;
+
 public class HashMap<K, V> {
     private Entry<K, V>[] buckets; // declare an array of entry;
     private int size = 0; //initial size is 0
