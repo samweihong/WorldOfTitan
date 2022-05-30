@@ -39,6 +39,20 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
+    public static int calculateDistance(PriorityQueue<Titan> killQueue){
+
+        int totalDistance = 0;
+        int currentNode = 0;
+        for(int i = 0; i < killQueue.getSize(); i++){
+            int distance = Math.abs(currentNode - killQueue.getElement(i).getIndex());
+            totalDistance += distance;
+            currentNode = killQueue.getElement(i).getIndex();
+        }
+
+        return totalDistance;
+
+    }
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
@@ -64,11 +78,13 @@ public class TitanEvaluationAndKillingPriority{
             System.out.printf("Titan %d Risk: %d\n", i, dangerRiskList.get(i-1));
         }
 
+        PriorityQueue<Titan> titanKillQueue = createKillQueue(titanList);
         System.out.println();
         System.out.print("Sequence to be killed: ");
-        System.out.println(killPriority(titanList));
+        System.out.println(killPriority(titanKillQueue));
 
         System.out.print("Total distance moved: ");
+        System.out.println(calculateDistance(titanKillQueue));
 
     }
 
