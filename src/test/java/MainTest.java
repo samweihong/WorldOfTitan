@@ -1,11 +1,13 @@
 import logic.Main;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.InvocationTargetException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class MainTest {
 
-    Character character = new Character("Levi Ackerman", 160, 65, 12, 12, 7, 8, 8);
+    GameCharacter character = new GameCharacter("Levi Ackerman", 160, 65, 12, 12, 7, 8, 8);
 
     @Test
     void testStoreCharacterInformation() {
@@ -16,35 +18,42 @@ class MainTest {
                 "\nAgility: " + character.getAgility() +
                 "\nIntelligence: " + character.getIntelligence() +
                 "\nCoordination: " + character.getCoordination() +
-                "\nLeadership: " + character.getLeadership(), Main.storeCharacterInformation());
+                "\nLeadership: " + character.getLeadership(), Main.storeGameCharacterInformation());
+    }
+//
+//    @Test
+//    void testLoadCharacterInformation() {
+//        assertEquals("Name: " + character.getName() +
+//                "\nHeight: " + character.getHeight() + "cm" +
+//                "\nWeight: " + character.getWeight() + "kg" +
+//                "\nStrength: " + character.getStrength() +
+//                "\nAgility: " + character.getAgility() +
+//                "\nIntelligence: " + character.getIntelligence() +
+//                "\nCoordination: " + character.getCoordination() +
+//                "\nLeadership: " + character.getLeadership(), Main.LoadGameCharacterInformation());
+//    }
+
+    @Test
+    void testReadInput() {
+        assertEquals("Levi Ackerman", Main.readInput());
     }
 
     @Test
-    void testLoadingCharacterInformation() {
-        assertEquals("Name: " + character.getName() +
-                "\nHeight: " + character.getHeight() + "cm" +
-                "\nWeight: " + character.getWeight() + "kg" +
-                "\nStrength: " + character.getStrength() +
-                "\nAgility: " + character.getAgility() +
-                "\nIntelligence: " + character.getIntelligence() +
-                "\nCoordination: " + character.getCoordination() +
-                "\nLeadership: " + character.getLeadership(), Main.loadCharacterInformation());
-    }
-
-    @Test
-    void testSortingAttribute() {
-        assertEquals("Levi Ackerman 12" +
-                "\nAnnie Leonhart 10" +
-                "\nMikasa Ackerman 10" +
-                "\nReiner Braun 9" +
-                "\nBertholdt Hoover 9" +
-                "\nJean Kristein 9" +
-                "\nEren Yeager 9" +
-                "\nHange Zoë 9" +
-                "\nErwin Smith 8" +
-                "\nSasha Blouse 6" +
-                "\nConnie Springer 6" +
-                "\nHistoria Reiss 4" +
-                "\nArmin Arlert 2", Main.sortingAttribute());
+    void testSortingAttribute() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        assertEquals("""
+                     Levi Ackerman 12
+                     Annie Leonhart 10
+                     Mikasa Ackerman 10
+                     Reiner Braun 9
+                     Bertholdt Hoover 9
+                     Jean Kristein 9
+                     Eren Yeager 9
+                     Hange Zoë 9
+                     Erwin Smith 8
+                     Sasha Blouse 6
+                     Connie Springer 6
+                     Historia Reiss 4
+                     Armin Arlert 2
+                     """, Main.sortingAttribute());
     }
 }

@@ -8,9 +8,9 @@ class FileHandlingTest {
 
     @Test
     void writeInFile() {
-        Character cha = new Character("Test", 185, 95, 9, 7, 7, 10, 8);
-        Character test[] = new Character[1];
-        test[0] = cha;
+        GameCharacter cha = new GameCharacter("Test", 185, 95, 9, 7, 7, 10, 8);
+        LinkedList<GameCharacter> test = new LinkedList<>();
+        test.add(cha);
         fileHandling.writeInFile(test,"testFile.json");
     }
 
