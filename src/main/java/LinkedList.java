@@ -190,15 +190,14 @@ public class LinkedList<E>{
         return str;
     }
 
-//    public Node<E> binarySearch(E value) {
-//        Node<E> start = head;
-//        Node<E> last = null;
+//    public Node<E> binarySearch(String ability, Comparator<E> comp) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+//        Method m = GameCharacter.class.getDeclaredMethod("get" + ability);
 //        do {
-//            Node<E> mid = getMiddle(head);
+//            E mid = getMiddle(head.element);
 //            if (mid == null) {
 //                return null;
 //            }
-//            if (mid.element.toString().equals(value.toString())) {
+//            if (comp.compare(m.invoke(mid), comp) == 0) {
 //                return mid;
 //            } else if (mid.element.compareTo(value) > 0) {
 //                start = mid.next;
@@ -211,26 +210,31 @@ public class LinkedList<E>{
 
     public void sortList(Comparator<E> comp) {
         head = mergeSort(head, comp);
+        Node<E> current = head;
+        while(current.next != null) {
+            current = current.next;
+        }
+        tail = current;
     }
 
-    public Node<E> mergeSort(Node<E> h, Comparator<E> comp) {
+    public Node<E> mergeSort(Node<E> head, Comparator<E> comp) {
         // Base case : if head is null
-        if (h == null || h.next == null) return h;
+        if (head == null || head.next == null) return head;
         // Get the middle of the list
-        Node<E> middle = getMiddle(h);
+        Node<E> middle = getMiddle(head);
         Node<E> nextOfMiddle = middle.next;
         // Set the next of middle node to null
         middle.next = null;
         // Apply mergeSort on left list
-        Node<E> left = mergeSort(h, comp);
+        Node<E> left = mergeSort(head, comp);
         // Apply mergeSort on right list
         Node<E> right = mergeSort(nextOfMiddle, comp);
         // Merge the left and right lists
-        Node<E> sortedlist = sortedMerge(left, right, comp);
+        Node<E> sortedlist = merge(left, right, comp);
         return sortedlist;
     }
 
-    private Node<E> sortedMerge(Node<E> a, Node<E> b, Comparator<E> comp) {
+    private Node<E> merge(Node<E> a, Node<E> b, Comparator<E> comp) {
         Node<E> result = null;
         /* Base cases */
         if (a == null) return b;
@@ -238,10 +242,10 @@ public class LinkedList<E>{
         /* Pick either a or b, and recur */
         if (comp.compare(a.element, b.element) < 0) {
             result = a;
-            result.next = sortedMerge(a.next, b, comp);
+            result.next = merge(a.next, b, comp);
         } else {
             result = b;
-            result.next = sortedMerge(a, b.next, comp);
+            result.next = merge(a, b.next, comp);
         }
         return result;
     }
