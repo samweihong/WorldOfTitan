@@ -1,3 +1,6 @@
+import logic.Queue;
+import logic.Titan;
+import logic.TitanEvaluationAndKillingPriority;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileInputStream;

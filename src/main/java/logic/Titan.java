@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.Random;
 
 public class Titan implements Comparable<Titan> {
@@ -7,14 +9,14 @@ public class Titan implements Comparable<Titan> {
     private int index;
 
     public Titan(String titan){ this.titan = titan; }
-    // generate Titan
+    // generate logic.Titan
     public Titan(){
         Random random = new Random();
         int titanType = random.nextInt(1, 4);
 
         if(titanType == 1){
             // Initializing string description for normal titan
-            StringBuilder normalTitan = new StringBuilder("Normal Titan (");
+            StringBuilder normalTitan = new StringBuilder("Normal logic.Titan (");
 
             // Generate attributes of normal titan with Random class
             int height = random.nextInt(1, 31),
@@ -47,18 +49,18 @@ public class Titan implements Comparable<Titan> {
             titan = normalTitan.toString();
 
         }
-        else if(titanType == 2) titan = "Abnormal Titan";
+        else if(titanType == 2) titan = "Abnormal logic.Titan";
         else {
             int nineTitans = random.nextInt(1, 10);
-            if(nineTitans == 1) titan = "Founding Titan";
-            else if(nineTitans == 2) titan = "Armored Titan";
-            else if(nineTitans == 3) titan = "Attack Titan";
-            else if(nineTitans == 4) titan = "Beast Titan";
-            else if(nineTitans == 5) titan = "Cart Titan";
-            else if(nineTitans == 6) titan = "Colossus Titan";
-            else if(nineTitans == 7) titan = "Female Titan";
-            else if(nineTitans == 8) titan = "Jaw Titan";
-            else if(nineTitans == 9) titan = "War Hammer Titan";
+            if(nineTitans == 1) titan = "Founding logic.Titan";
+            else if(nineTitans == 2) titan = "Armored logic.Titan";
+            else if(nineTitans == 3) titan = "Attack logic.Titan";
+            else if(nineTitans == 4) titan = "Beast logic.Titan";
+            else if(nineTitans == 5) titan = "Cart logic.Titan";
+            else if(nineTitans == 6) titan = "Colossus logic.Titan";
+            else if(nineTitans == 7) titan = "Female logic.Titan";
+            else if(nineTitans == 8) titan = "Jaw logic.Titan";
+            else if(nineTitans == 9) titan = "War Hammer logic.Titan";
         }
     }
 

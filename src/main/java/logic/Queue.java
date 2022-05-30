@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.LinkedList;
 
 public class Queue<E> {
@@ -38,6 +40,6 @@ public class Queue<E> {
     }
 
     public String toString() {
-        return "Queue: " + queue.toString();
+        return "logic.Queue: " + queue.toString();
     }
 }

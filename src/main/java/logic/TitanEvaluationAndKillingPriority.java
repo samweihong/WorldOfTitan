@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.*;
 
 public class TitanEvaluationAndKillingPriority{
@@ -31,7 +33,7 @@ public class TitanEvaluationAndKillingPriority{
 
         StringBuilder killSequence = new StringBuilder();
         for(int i = 0; i < killQueue.getSize(); i++){
-            killSequence.append("Titan ").append(killQueue.getElement(i).getIndex()).append(" --> ");
+            killSequence.append("logic.Titan ").append(killQueue.getElement(i).getIndex()).append(" --> ");
         }
         killSequence.delete(killSequence.length() - 4, killSequence.length());
 
@@ -68,14 +70,14 @@ public class TitanEvaluationAndKillingPriority{
             Titan titan = new Titan();
             titan.setIndex(i);
             titanList.add(titan);
-            System.out.printf("Titan %d: %s\n", i, titan);
+            System.out.printf("logic.Titan %d: %s\n", i, titan);
             dangerRiskList.add(titan.evaluateRisk(titan.toString()));
         }
 
         System.out.println();
         System.out.println("Their respective danger risks: ");
         for(int i = 1; i <= noOfTitans; i++){
-            System.out.printf("Titan %d Risk: %d\n", i, dangerRiskList.get(i-1));
+            System.out.printf("logic.Titan %d Risk: %d\n", i, dangerRiskList.get(i-1));
         }
 
         PriorityQueue<Titan> titanKillQueue = createKillQueue(titanList);

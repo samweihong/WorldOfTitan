@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.LinkedList;
 
 public class PriorityQueue<E extends Comparable<E>> extends Queue<E> {
