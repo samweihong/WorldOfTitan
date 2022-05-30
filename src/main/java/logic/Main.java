@@ -1,99 +1,63 @@
 package logic;
 
 import java.util.*;
+import java.util.Scanner;
+import java.util.Arrays;
+import java.lang.reflect.*;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
-    static FileHandling fileHandling = new FileHandling();
 
-    public static void main(String args[]) {
-//        System.out.println(storeCharacterInformation());
-//        storeInLinkedList();
-//        System.out.println(loadCharacterInformation());
-//        System.out.println(sortingAttribute());
+    public static void main(String args[]) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        System.out.println(sortingAttribute());
+//        System.out.println(storeGameCharacterInformation());
+//        System.out.println(loadGameCharacterInformation());
     }
 
-    public static Character loadCharacterInformation() {
-        Character[] characters = fileHandling.readFromFile("myjson.json");
-        System.out.print("Enter name: " );
-        String name = scanner.nextLine();
-        for(Character character : characters)
-            if (character.getName().equalsIgnoreCase(name)) return character;
-        return null;
-    }
+//    public static GameCharacter loadGameCharacterInformation() {
+//        System.out.print("Enter name: ");
+//        String input = readInput();
+//
+//    }
 
-    public static Character storeCharacterInformation() {
-        Character[] characters = fileHandling.readFromFile("myjson.json");
+    public static GameCharacter storeGameCharacterInformation() {
+        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
         System.out.print("Enter name: " );
-        String name = scanner.nextLine();
+        String name = readInput();
         System.out.print("Enter characteristics: ");
-        String characteristics = scanner.nextLine();
-        String[] strArray = characteristics.split(" ");
-        int[] intArray = new int[strArray.length];
-        for(int i = 0; i < intArray.length; i++) intArray[i] = Integer.parseInt(strArray[i]);
-        Character character = new Character(name, intArray[0], intArray[1], intArray[2], intArray[3], intArray[4], intArray[5], intArray[6]);
-        int l = characters.length;
-        boolean found = false;
-        for(int i = 0; i < l; i++) {
-            if (characters[i].getName().equalsIgnoreCase(character.getName())) {
-                found = true;
-                break;
+        int[] intArray = Arrays.stream(readInput().split(" ")).mapToInt(Integer::parseInt).toArray();
+        GameCharacter character = new GameCharacter(name, intArray[0], intArray[1], intArray[2], intArray[3], intArray[4], intArray[5], intArray[6]);
+        for(int i = 0 ; i < characters.getSize(); i++) {
+            if (characters.get(i).getName().equalsIgnoreCase(name)) {
+                characters.set(characters.indexOf(characters.get(i)), character);
+                FileHandling.writeInFile(characters, "myjson.json");
+                return character;
             }
         }
-        if (found == false) {
-            Character[] characters1 = new Character[l + 1];
-            for(int i = 0; i < l; i++) characters1[i] = characters[i];
-            characters1[l] = character;
-            fileHandling.writeInFile(characters1, "myjson.json");
-            return character;
-        }
+        characters.add(character);
+        FileHandling.writeInFile(characters, "myjson.json");
         return character;
     }
 
-    public static void storeInLinkedList() {
-        Character[] characters = fileHandling.readFromFile("myjson.json");
-        LinkedList<Character> list = new LinkedList<>();
-        Collections.addAll(list, characters);
-    }
-
-    public static String sortingAttribute() {
-        Character[] characters = fileHandling.readFromFile("myjson.json");
+    public static String sortingAttribute() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
         System.out.print("Sorting attribute: ");
-        String input = scanner.nextLine();
+        String input = readInput();
+        Method n = GameCharacter.class.getDeclaredMethod("getName");
+        Method m = GameCharacter.class.getDeclaredMethod("get" + input);
+        m.setAccessible(true);
+        n.setAccessible(true);
         String str = "";
         System.out.println();
-        switch (input) {
-            case ("Height"):
-                Arrays.sort(characters, new HeightComparator());
-                for(Character character : characters) str += character.getName() + " " + character.getHeight() + "\n" ;
-                break;
-            case ("Weight"):
-                Arrays.sort(characters, new WeightComparator());
-                for(Character character : characters) str += character.getName() + " " + character.getWeight() + "\n";
-                break;
-            case ("Strength"):
-                Arrays.sort(characters, new StrengthComparator());
-                for(Character character : characters) str += character.getName() + " " + character.getStrength() + "\n";
-                break;
-            case ("Agility"):
-                Arrays.sort(characters, new AgilityComparator());
-                for(Character character : characters) str += character.getName() + " " + character.getAgility() + "\n";
-                break;
-            case ("Intelligence"):
-                Arrays.sort(characters, new IntelligenceComparator());
-                for(Character character : characters) str += character.getName() + " " + character.getIntelligence() + "\n";
-                break;
-            case ("Coordination"):
-                Arrays.sort(characters, new CoordinationComparator());
-                for(Character character : characters) str += character.getName() + " " + character.getCoordination() + "\n";
-                break;
-            case ("Leadership"):
-                Arrays.sort(characters, new LeadershipComparator());
-                for(Character character : characters) str += character.getName() + " " + character.getLeadership() + "\n";
-                break;
-            default:
-                str += "Invalid Attribute";
+        characters.sortList(SortBy.valueOf(input));
+        for (int i = 0; i < characters.getSize(); i++) {
+            str += n.invoke(characters.get(i)) + " " + m.invoke(characters.get(i)) + "\n";
         }
         return str;
     }
+
+    public static String readInput() {
+        return scanner.nextLine();
+    }
+
 }
