@@ -1,7 +1,9 @@
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Comparator;
 
 public class LinkedList<E>{
-    public Node<E> head;
+    private Node<E> head;
     private Node<E> tail;
     private int size;
 
@@ -190,23 +192,75 @@ public class LinkedList<E>{
         return str;
     }
 
-//    public Node<E> binarySearch(String ability, Comparator<E> comp) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-//        Method m = GameCharacter.class.getDeclaredMethod("get" + ability);
-//        do {
-//            E mid = getMiddle(head.element);
-//            if (mid == null) {
-//                return null;
-//            }
-//            if (comp.compare(m.invoke(mid), comp) == 0) {
-//                return mid;
-//            } else if (mid.element.compareTo(value) > 0) {
-//                start = mid.next;
-//            } else {
-//                last = mid;
-//            }
-//        } while (last == null || last != start);
-//        return null;
-//    }
+    public LinkedList<E> binarySearchList(String ability, int value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        LinkedList<E> outputList = new LinkedList<>();
+        Node<E> firstNode = firstNodeBinarySearch(ability, value);
+        Node<E> lastNode = lastNodeBinarySearch(ability, value);
+        for (Node<E> node = firstNode; node != lastNode.next; node = node.next) {
+            outputList.add(node.element);
+        }
+        return outputList;
+    }
+
+    public Node<E> firstNodeBinarySearch(String ability, int value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method m = GameCharacter.class.getDeclaredMethod("get" + ability);
+        Node<E> start = head;
+        Node<E> last = null;
+        Node<E> firstNode = null;
+        do {
+            Node<E> mid = middleNode(start, last);
+            if (mid == null) firstNode = null; // If middle is empty
+            // If value is present at mid
+            if (m.invoke(mid.element).equals(value)) {
+                firstNode = mid;
+                last = mid;
+            }
+            // If value is less than mid
+            else if (value < (Integer) m.invoke(mid.element)) {
+                start = mid.next;
+            }
+            // If the value is more than mid
+            else last = mid;
+        } while (last == null || last != start);
+        return firstNode;
+    }
+
+    public Node<E> lastNodeBinarySearch(String ability, int value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        Method m = GameCharacter.class.getDeclaredMethod("get" + ability);
+        Node<E> start = head;
+        Node<E> last = null;
+        Node<E> lastNode = null;
+        do {
+            Node<E> mid = middleNode(start, last);
+            if (mid == null) lastNode = null; // If middle is empty
+            // If value is present at mid
+            if (m.invoke(mid.element).equals(value)) {
+                lastNode = mid;
+                start = mid.next;
+            }
+            // If value is less than mid
+            else if (value < (Integer) m.invoke(mid.element)) {
+                start = mid.next;
+            }
+            // If the value is more than mid
+            else last = mid;
+        } while (last == null || last != start);
+        return lastNode;
+    }
+
+    private Node<E> middleNode(Node<E> start, Node<E> last) {
+        if (start == null) return null;
+        Node<E> slow = start;
+        Node<E> fast = start.next;
+        while (fast != last) {
+            fast = fast.next;
+            if (fast != last) {
+                slow = slow.next;
+                fast = fast.next;
+            }
+        }
+        return slow;
+    }
 
     public void sortList(Comparator<E> comp) {
         head = mergeSort(head, comp);
@@ -239,7 +293,7 @@ public class LinkedList<E>{
         /* Base cases */
         if (a == null) return b;
         if (b == null) return a;
-        /* Pick either a or b, and recur */
+        /* Pick either a or b, and recurse */
         if (comp.compare(a.element, b.element) < 0) {
             result = a;
             result.next = merge(a.next, b, comp);
@@ -260,4 +314,5 @@ public class LinkedList<E>{
         }
         return slow;
     }
+
 }
