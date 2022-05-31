@@ -3,6 +3,16 @@ package logic;
 import java.lang.StringBuilder;
 
 public class WordConverter {
+    public static void main(String[] args) {
+        String marleyText = "rsgc(qqd^i$tkz)$ko$^udzhd,(rld$sgk^z$)$^gpssld";
+        String key = "marley";
+        String encryptedText = encryptText(marleyText, key);
+        String decryptedText = decryptText(encryptedText, key);
+        System.out.println("Marley Text: " + marleyText);
+        System.out.println("Encrypted Text: " + encryptedText);
+        System.out.println("Decrypted Text: " + decryptedText);
+        System.out.println("Paradis Text: " + convertWord(decryptedText));
+    }
     public static String convertWord(String input){
         HashMap<Character, Character> map = new HashMap<>();
         char[] paradis = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '$', ','};
@@ -51,5 +61,59 @@ public class WordConverter {
             }
         }
         return res.toString();
+    }
+
+
+    //EXTRA FEATURE --> CIPHER
+    public static String encryptText(String str, String key){
+        str = str.toUpperCase();
+        key = generateKey(str, key);
+        String res = "";
+
+        for(int i = 0; i<str.length(); i++){
+            if(!Character.isAlphabetic(str.charAt(i))){
+                res += str.charAt(i);
+                continue;
+            }
+            int c = (str.charAt(i) + key.charAt(i)) % 26; // mod 26 to convert the number in to range 0 - 25
+            c += 'A';
+            res += (char)c;
+        }
+        return res;
+    }
+
+    public static String decryptText(String encrypt, String key){
+        encrypt = encrypt.toUpperCase();
+        key = generateKey(encrypt, key);
+        String res = "";
+        for(int i = 0; i<encrypt.length(); i++){
+            if(!Character.isAlphabetic(encrypt.charAt(i))){
+                res += encrypt.charAt(i);
+                continue;
+            }
+            int c = (encrypt.charAt(i) - key.charAt(i) + 26) % 26;
+            c += 'A';
+            res += (char)c;
+        }
+        return res.toLowerCase();
+    }
+
+    public static String generateKey(String str, String key){
+        key = key.toUpperCase();
+        int s = str.length();
+        int k = key.length();
+        if(s == k){
+            return key;
+        }
+        if(s < k){
+            return key.substring(0, s);
+        }
+        String newKey = key;
+        int i = k;
+        while(i < s){
+            newKey += key.charAt(i % k);
+            i++;
+        }
+        return newKey;
     }
 }
