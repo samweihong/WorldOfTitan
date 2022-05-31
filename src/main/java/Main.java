@@ -6,16 +6,21 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
 
     public static void main(String args[]) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        System.out.println(sortingAttribute());
 //        System.out.println(storeGameCharacterInformation());
 //        System.out.println(loadGameCharacterInformation());
+//        System.out.println(sortingAttribute());
+        System.out.println(binarySearch());
     }
 
-//    public static GameCharacter loadGameCharacterInformation() {
-//        System.out.print("Enter name: ");
-//        String input = readInput();
-//
-//    }
+    public static GameCharacter loadGameCharacterInformation() {
+        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        System.out.print("Enter name: " );
+        String name = readInput();
+        for(int i = 0 ; i < characters.getSize(); i++) {
+            if (characters.get(i).getName().equalsIgnoreCase(name)) return characters.get(i);
+        }
+        return null;
+    }
 
     public static GameCharacter storeGameCharacterInformation() {
         LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
@@ -51,6 +56,25 @@ public class Main {
             str += n.invoke(characters.get(i)) + " " + m.invoke(characters.get(i)) + "\n";
         }
         return str;
+    }
+
+    public static String binarySearch() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> outputList;
+        Method n = GameCharacter.class.getDeclaredMethod("getName");
+        String str = "";
+        System.out.print("Finding ability : ");
+        String ability = readInput();
+        System.out.println();
+        System.out.print("value: ");
+        int value = Integer.parseInt(readInput());
+        System.out.println();
+        characters.sortList(SortBy.valueOf(ability));
+        outputList = characters.binarySearchList(ability, value);
+        for (int i = 0; i < outputList.getSize(); i++) {
+            str += n.invoke(outputList.get(i)) + ", ";
+        }
+        return str.substring(0, str.length() - 2);
     }
 
     public static String readInput() {
