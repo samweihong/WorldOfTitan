@@ -20,22 +20,27 @@ class MainTest {
                 "\nCoordination: " + character.getCoordination() +
                 "\nLeadership: " + character.getLeadership(), Main.storeGameCharacterInformation());
     }
-//
-//    @Test
-//    void testLoadCharacterInformation() {
-//        assertEquals("Name: " + character.getName() +
-//                "\nHeight: " + character.getHeight() + "cm" +
-//                "\nWeight: " + character.getWeight() + "kg" +
-//                "\nStrength: " + character.getStrength() +
-//                "\nAgility: " + character.getAgility() +
-//                "\nIntelligence: " + character.getIntelligence() +
-//                "\nCoordination: " + character.getCoordination() +
-//                "\nLeadership: " + character.getLeadership(), Main.LoadGameCharacterInformation());
-//    }
+
+    @Test
+    void testLoadCharacterInformation() {
+        assertEquals("Name: " + character.getName() +
+                "\nHeight: " + character.getHeight() + "cm" +
+                "\nWeight: " + character.getWeight() + "kg" +
+                "\nStrength: " + character.getStrength() +
+                "\nAgility: " + character.getAgility() +
+                "\nIntelligence: " + character.getIntelligence() +
+                "\nCoordination: " + character.getCoordination() +
+                "\nLeadership: " + character.getLeadership(), Main.loadGameCharacterInformation());
+    }
 
     @Test
     void testReadInput() {
         assertEquals("Levi Ackerman", Main.readInput());
+    }
+
+    @Test
+    void testBinarySearch() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+        assertEquals("Levi Ackerman, Historia Reiss, Jean Kristein, Annie Leonhart, Reiner Bruan", Main.binarySearch());
     }
 
     @Test
