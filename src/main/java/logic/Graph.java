@@ -1,101 +1,68 @@
 package logic;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
-public class Graph {
+public class Graph{
 
-    public static class Vertex<T>{
-        private T data;
-        private boolean visited;
-        private List<Vertex<T>> neighbours = new LinkedList<>();
-        public Vertex(T data) { this.data = data; }
-
-        public boolean isVisited() { return visited; }
-
-        public void setVisited(boolean visited) { this.visited = visited; }
-
-        public List<Vertex<T>> getNeighbours() { return neighbours; }
-
-        public void setNeighbours(List<Vertex<T>> neighbours) { this.neighbours = neighbours; }
+    public static String printPath(List<Integer> path){
+        String direction = "";
+        for(Integer v : path) direction += (v + "->");
+        return direction.substring(0, direction.length() - 2);
     }
+    public static boolean isNotVisited(int x, List<Integer> path){
+        for(int i = 0; i < path.size(); i++){
+            if (path.get(i) == x)
+                return false;
+        }
+        return true;
+    }
+    public static void findpaths(List<List<Integer>> graph, int source, int destination) {
+        java.util.Queue<List<Integer>> queue = new LinkedList<>();
+        
+        List<Integer> path = new ArrayList<>();
+        path.add(source);
+        queue.offer(path);
 
-    public static class BFS<T>{
-        private Vertex<T> startVertex;
-        public BFS(Vertex<T> startVertex){ this.startVertex = startVertex; }
-        public void traverse(){
-            Queue<Vertex<T>> queue = new LinkedList<>();
-            queue.add(startVertex);
-            while(!queue.isEmpty()){
-                Vertex<T> current = queue.poll();
-                if(!current.isVisited()){
-                    current.setVisited(true);
-                    queue.addAll(current.getNeighbours());
+        while (!queue.isEmpty()){
+            path = queue.poll();
+            int last = path.get(path.size() - 1);
+            if (last == destination) System.out.println(printPath(path));
+            List<Integer> lastNode = graph.get(last);
+            for(int i = 0; i < lastNode.size(); i++){
+                if (isNotVisited(lastNode.get(i), path)){
+                    List<Integer> newpath = new ArrayList<>(path);
+                    newpath.add(lastNode.get(i));
+                    queue.offer(newpath);
                 }
             }
         }
-
     }
-
-//    public static int[][] map = {
-//           /* 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 */
-//        /*0*/{0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-//        /*1*/{1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-//        /*2*/{0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
-//        /*3*/{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-//        /*4*/{0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-//        /*5*/{1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0},
-//        /*6*/{0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0 ,1},
-//        /*7*/{1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-//        /*8*/{0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0},
-//        /*9*/{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1},
-//       /*10*/{0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0},
-//       /*11*/{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-//       /*12*/{0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0},
-//       /*13*/{0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0},
-//       /*14*/{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
-//       /*15*/{0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0}
-//    };
 
     public static void main(String[] args) {
 
         // Creating map of Paradis
-        Vertex<Integer> v0 = new Vertex<>(0);
-        Vertex<Integer> v1 = new Vertex<>(1);
-        Vertex<Integer> v2 = new Vertex<>(2);
-        Vertex<Integer> v3 = new Vertex<>(3);
-        Vertex<Integer> v4 = new Vertex<>(4);
-        Vertex<Integer> v5 = new Vertex<>(5);
-        Vertex<Integer> v6 = new Vertex<>(6);
-        Vertex<Integer> v7 = new Vertex<>(7);
-        Vertex<Integer> v8 = new Vertex<>(8);
-        Vertex<Integer> v9 = new Vertex<>(9);
-        Vertex<Integer> v10 = new Vertex<>(10);
-        Vertex<Integer> v11 = new Vertex<>(11);
-        Vertex<Integer> v12 = new Vertex<>(12);
-        Vertex<Integer> v13 = new Vertex<>(13);
-        Vertex<Integer> v14 = new Vertex<>(14);
-        Vertex<Integer> v15 = new Vertex<>(15);
+        List<List<Integer>> map = new ArrayList<>();
+        for(int i = 0; i < 16; i++) map.add(new ArrayList<>());
 
-        v0.setNeighbours(Arrays.asList(v1, v5, v7));
-        v1.setNeighbours(Arrays.asList(v0, v2, v4, v6));
-        v2.setNeighbours(Arrays.asList(v1, v3, v11, v13));
-        v3.setNeighbours(Arrays.asList(v2, v10));
-        v4.setNeighbours(Arrays.asList(v1, v6, v10));
-        v5.setNeighbours(Arrays.asList(v0, v6, v7, v12));
-        v6.setNeighbours(Arrays.asList(v1, v4, v5, v8, v15));
-        v7.setNeighbours(Arrays.asList(v0, v5, v9));
-        v8.setNeighbours(Arrays.asList(v6, v10));
-        v9.setNeighbours(Arrays.asList(v7, v12, v15));
-        v10.setNeighbours(Arrays.asList(v3, v4, v8, v14));
-        v11.setNeighbours(Arrays.asList(v2, v13));
-        v12.setNeighbours(Arrays.asList(v5, v9));
-        v13.setNeighbours(Arrays.asList(v2, v11, v14));
-        v14.setNeighbours(Arrays.asList(v10, v13, v15));
-        v15.setNeighbours(Arrays.asList(v6, v9, v14));
+        map.get(0).addAll(Arrays.asList(1, 5, 7));
+        map.get(1).addAll(Arrays.asList(0, 2, 4, 6));
+        map.get(2).addAll(Arrays.asList(1, 3, 11, 13));
+        map.get(3).addAll(Arrays.asList(2, 10));
+        map.get(4).addAll(Arrays.asList(1, 6, 10));
+        map.get(5).addAll(Arrays.asList(0, 6, 7, 12));
+        map.get(6).addAll(Arrays.asList(1, 4, 5, 8, 15));
+        map.get(7).addAll(Arrays.asList(0, 5, 9));
+        map.get(8).addAll(Arrays.asList(6, 10));
+        map.get(9).addAll(Arrays.asList(7, 12, 15));
+        map.get(10).addAll(Arrays.asList(3, 4, 8, 14));
+        map.get(11).addAll(Arrays.asList(2, 13));
+        map.get(12).addAll(Arrays.asList(5, 9));
+        map.get(13).addAll(Arrays.asList(2, 11, 14));
+        map.get(14).addAll(Arrays.asList(10, 13, 15));
+        map.get(15).addAll(Arrays.asList(6, 9, 14));
+
+        // finding shortest path
+        findpaths(map, 0, 6);
 
     }
-
 }
