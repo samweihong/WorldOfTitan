@@ -23,10 +23,12 @@ public class Graph{
         path.add(source);
         queue.offer(path);
 
+        List<List<Integer>> solutions = new ArrayList<>();
+
         while (!queue.isEmpty()){
             path = queue.poll();
             int last = path.get(path.size() - 1);
-            if (last == destination) System.out.println(printPath(path));
+            if (last == destination) solutions.add(path);
             List<Integer> lastNode = graph.get(last);
             for(int i = 0; i < lastNode.size(); i++){
                 if (isNotVisited(lastNode.get(i), path)){
@@ -36,6 +38,13 @@ public class Graph{
                 }
             }
         }
+        int size = solutions.get(0).size();
+        List<List<Integer>> optimalSolutions = new ArrayList<>();
+        for(int i = 0; i < solutions.size(); i++){
+            if(solutions.get(i).size() > size) break;
+            else optimalSolutions.add(solutions.get(i));
+        }
+        for(List<Integer> optimalSolution : optimalSolutions) System.out.println(printPath(optimalSolution));
     }
 
     public static void main(String[] args) {
