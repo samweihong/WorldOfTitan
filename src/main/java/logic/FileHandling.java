@@ -1,3 +1,5 @@
+package logic;
+
 import com.google.gson.Gson;
 import java.io.*;
 
@@ -12,7 +14,9 @@ public class FileHandling {
     public static void writeInFile(LinkedList<GameCharacter> characters, String path) {
         File file = new File(path);
         try ( final FileWriter fileWriter = new FileWriter(file) ) {
-            new Gson().toJson(characters, fileWriter);
+            GameCharacter[] charactersArray = new GameCharacter[characters.getSize()];
+            for(int i = 0; i < characters.getSize(); i++) charactersArray[i] = characters.get(i);
+            new Gson().toJson(charactersArray, fileWriter);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

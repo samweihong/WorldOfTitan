@@ -1,6 +1,8 @@
+import logic.GameCharacter;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
+import logic.FileHandling;
+import logic.LinkedList;
 
 class FileHandlingTest {
 
