@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 group 'org.example'
@@ -15,6 +17,12 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
 }
 
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
 test {
     useJUnitPlatform()
 }
+
+mainClassName = 'gui.MainGUI'
