@@ -35,7 +35,7 @@ public class Graph{
         }
         return true;
     }
-    public static void findPaths(List<List<Integer>> graph, int source, int destination) {
+    public static List<List<Integer>> findPaths(List<List<Integer>> graph, int source, int destination) {
         java.util.Queue<List<Integer>> queue = new LinkedList<>();
         
         List<Integer> path = new ArrayList<>();
@@ -64,6 +64,7 @@ public class Graph{
             else optimalSolutions.add(solutions.get(i));
         }
         for(List<Integer> optimalSolution : optimalSolutions) System.out.println(printPath(optimalSolution));
+        return optimalSolutions;
     }
 
     public static void main(String[] args) {
