@@ -1,4 +1,3 @@
-import logic.Queue;
 import logic.WallOfMaria;
 import org.junit.jupiter.api.Test;
 
