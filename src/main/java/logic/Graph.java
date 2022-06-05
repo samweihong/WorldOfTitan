@@ -77,7 +77,8 @@ public class Graph{
 
         // finding shortest path
         System.out.println("Best path(s):");
-        findPaths(Graph.mapOfParadis, 0, location);
+        try{ findPaths(Graph.mapOfParadis, 0, location); }
+        catch (IndexOutOfBoundsException e) { System.out.println("Location unavailable: not on Map of Paradis"); }
 
     }
 }
