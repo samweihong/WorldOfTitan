@@ -25,8 +25,8 @@ public class Graph{
 
     public static String printPath(List<Integer> path){
         String direction = "";
-        for(Integer v : path) direction += (v + "->");
-        return direction.substring(0, direction.length() - 2);
+        for(Integer v : path) direction += (v + "-->");
+        return direction.substring(0, direction.length() - 3);
     }
     public static boolean isNotVisited(int x, List<Integer> path){
         for(int i = 0; i < path.size(); i++){
@@ -68,8 +68,15 @@ public class Graph{
 
     public static void main(String[] args) {
 
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter location of Titan: ");
+        int location = scanner.nextInt();
+        scanner.close();
+
+
         // finding shortest path
-        findpaths(Graph.mapOfParadis, 0, 6);
+        System.out.println("Best path(s):");
+        findpaths(Graph.mapOfParadis, 0, location);
 
     }
 }
