@@ -38,10 +38,8 @@ public class StoreLoadSortingBinarySearch {
         return character;
     }
 
-    public static String sortingAttribute() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    public static String sortingAttribute(String input) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
-        System.out.print("Sorting attribute: ");
-        String input = readInput();
         Method n = GameCharacter.class.getDeclaredMethod("getName");
         Method m = GameCharacter.class.getDeclaredMethod("get" + input);
         m.setAccessible(true);
@@ -55,17 +53,11 @@ public class StoreLoadSortingBinarySearch {
         return str;
     }
 
-    public static String binarySearch() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    public static String binarySearch(String ability, int value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
         LinkedList<GameCharacter> outputList;
         Method n = GameCharacter.class.getDeclaredMethod("getName");
         String str = "";
-        System.out.print("Finding ability : ");
-        String ability = readInput();
-        System.out.println();
-        System.out.print("value: ");
-        int value = Integer.parseInt(readInput());
-        System.out.println();
         characters.sortList(SortBy.valueOf(ability));
         outputList = characters.binarySearchList(ability, value);
         for (int i = 0; i < outputList.getSize(); i++) {
