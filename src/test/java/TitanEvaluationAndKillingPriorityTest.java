@@ -13,7 +13,7 @@ class TitanEvaluationAndKillingPriorityTest {
 
     @Test
     void testEvaluateDangerRisk() {
-        java.util.Queue<List<Titan>> data = getTestData();
+        Queue<List<Titan>> data = getTestData();
         assertNotNull(data);
 
         assertEquals(Arrays.asList(19, 13, 15), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
@@ -25,7 +25,7 @@ class TitanEvaluationAndKillingPriorityTest {
         assertEquals(Arrays.asList(15, 5, 12), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
     }
 
-    private java.util.Queue<List<Titan>> getTestData() {
+    private Queue<List<Titan>> getTestData() {
         Queue<List<Titan>> data = new ArrayDeque<>();
         try (Scanner input = new Scanner(new FileInputStream("src/test/resources/test-data/evaluateDangerRiskTest.txt"))) {
             while (input.hasNextLine()) {

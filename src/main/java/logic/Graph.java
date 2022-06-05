@@ -35,7 +35,7 @@ public class Graph{
         }
         return true;
     }
-    public static void findpaths(List<List<Integer>> graph, int source, int destination) {
+    public static void findPaths(List<List<Integer>> graph, int source, int destination) {
         java.util.Queue<List<Integer>> queue = new LinkedList<>();
         
         List<Integer> path = new ArrayList<>();
@@ -76,7 +76,7 @@ public class Graph{
 
         // finding shortest path
         System.out.println("Best path(s):");
-        findpaths(Graph.mapOfParadis, 0, location);
+        findPaths(Graph.mapOfParadis, 0, location);
 
     }
 }
