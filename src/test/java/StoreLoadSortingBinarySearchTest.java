@@ -39,7 +39,7 @@ public class StoreLoadSortingBinarySearchTest {
 
     @Test
     void testBinarySearch() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        assertEquals("Levi Ackerman, Historia Reiss, Jean Kristein, Annie Leonhart, Reiner Bruan", logic.StoreLoadSortingBinarySearch.binarySearch());
+        assertEquals("Levi Ackerman, Historia Reiss, Jean Kristein, Annie Leonhart, Reiner Bruan", logic.StoreLoadSortingBinarySearch.binarySearch(StoreLoadSortingBinarySearch.readInput(), Integer.parseInt(StoreLoadSortingBinarySearch.readInput())));
     }
 
     @Test
@@ -58,6 +58,6 @@ public class StoreLoadSortingBinarySearchTest {
                      Connie Springer 6
                      Historia Reiss 4
                      Armin Arlert 2
-                     """, logic.StoreLoadSortingBinarySearch.sortingAttribute());
+                     """, logic.StoreLoadSortingBinarySearch.sortingAttribute(StoreLoadSortingBinarySearch.readInput()));
     }
 }
