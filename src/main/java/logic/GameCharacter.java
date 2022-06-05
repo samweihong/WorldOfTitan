@@ -1,4 +1,11 @@
-public class GameCharacter{
+package logic;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class GameCharacter {
     private String name;
     private int height;
     private int weight;
@@ -52,6 +59,3 @@ public class GameCharacter{
                 "\nCoordination: " + coordination + "\nLeadership: " + leadership + "\n";
     }
 }
-
-
-

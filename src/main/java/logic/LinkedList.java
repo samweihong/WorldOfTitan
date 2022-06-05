@@ -1,8 +1,10 @@
+package logic;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 
-public class LinkedList<E>{
+public class LinkedList<E> {
     private Node<E> head;
     private Node<E> tail;
     private int size;
@@ -314,5 +316,4 @@ public class LinkedList<E>{
         }
         return slow;
     }
-
 }

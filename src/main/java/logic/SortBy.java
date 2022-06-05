@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.Comparator;
 
 public enum SortBy implements Comparator<GameCharacter> {
@@ -36,5 +38,5 @@ public enum SortBy implements Comparator<GameCharacter> {
         public int compare(GameCharacter c1, GameCharacter c2) {
             return Integer.compare(c2.getLeadership(), c1.getLeadership());
         }
-    },
+    }
 }
