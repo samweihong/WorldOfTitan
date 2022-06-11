@@ -3,6 +3,7 @@ import logic.GameCharacterList;
 
 import logic.LinkedList;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -16,6 +17,7 @@ class CharacterListTest {
     void testWriteToFile() {
         GameCharacter gameCharacter1 = new GameCharacter("Test1", 185, 95, 9, 7, 7, 10, 8);
         GameCharacter gameCharacter2 = new GameCharacter("Test2", 100, 10, 1, 2, 3, 4, 5);
+        GameCharacterList.clear();
         GameCharacterList.getGameCharacterList().add(gameCharacter1);
         GameCharacterList.getGameCharacterList().add(gameCharacter2);
         GameCharacterList.writeToFile(PATH);
