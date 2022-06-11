@@ -194,6 +194,25 @@ public class LinkedList<E> {
         return str;
     }
 
+    public Object[] toArray() {
+        Object[] a = new Object[size];
+        int i = 0;
+        for (Node<E> current = head; current != null; current = current.next)
+            a[i++] = current.element;
+        return a;
+    }
+
+    @SuppressWarnings("unchecked")
+    public E[] toArray(E[] a) {
+        if (a.length < size)
+            a = (E[]) java.lang.reflect.Array.newInstance(a.getClass().getComponentType(), size);
+
+        int i = 0;
+        for (Node<E> current = head; current != null; current = current.next)
+            a[i++] = current.element;
+        return a;
+    }
+
     public LinkedList<E> binarySearchList(String ability, int value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
         LinkedList<E> outputList = new LinkedList<>();
         Node<E> firstNode = firstNodeBinarySearch(ability, value);
@@ -305,8 +324,8 @@ public class LinkedList<E> {
         }
         return result;
     }
-
     // Utility function to get the middle of the linked list
+
     private Node<E> getMiddle(Node<E> head) {
         if (head == null) return head;
         Node<E> slow = head, fast = head;

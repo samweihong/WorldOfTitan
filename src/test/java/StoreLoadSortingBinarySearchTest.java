@@ -10,26 +10,26 @@ public class StoreLoadSortingBinarySearchTest {
 
     @Test
     void testStoreCharacterInformation() {
-        assertEquals("Name: " + character.getName() +
-                "\nHeight: " + character.getHeight() + "cm" +
-                "\nWeight: " + character.getWeight() + "kg" +
-                "\nStrength: " + character.getStrength() +
-                "\nAgility: " + character.getAgility() +
-                "\nIntelligence: " + character.getIntelligence() +
-                "\nCoordination: " + character.getCoordination() +
-                "\nLeadership: " + character.getLeadership(), logic.StoreLoadSortingBinarySearch.storeGameCharacterInformation(StoreLoadSortingBinarySearch.readInput(), StoreLoadSortingBinarySearch.readCharacteristicsInput()));
+        assertEquals("Name: " + character.name() +
+                "\nHeight: " + character.height() + "cm" +
+                "\nWeight: " + character.weight() + "kg" +
+                "\nStrength: " + character.strength() +
+                "\nAgility: " + character.agility() +
+                "\nIntelligence: " + character.intelligence() +
+                "\nCoordination: " + character.coordination() +
+                "\nLeadership: " + character.leadership(), logic.StoreLoadSortingBinarySearch.storeGameCharacterInformation(StoreLoadSortingBinarySearch.readInput(), StoreLoadSortingBinarySearch.readCharacteristicsInput()));
     }
 
     @Test
     void testLoadCharacterInformation() {
-        assertEquals("Name: " + character.getName() +
-                "\nHeight: " + character.getHeight() + "cm" +
-                "\nWeight: " + character.getWeight() + "kg" +
-                "\nStrength: " + character.getStrength() +
-                "\nAgility: " + character.getAgility() +
-                "\nIntelligence: " + character.getIntelligence() +
-                "\nCoordination: " + character.getCoordination() +
-                "\nLeadership: " + character.getLeadership(), logic.StoreLoadSortingBinarySearch.loadGameCharacterInformation(StoreLoadSortingBinarySearch.readInput()));
+        assertEquals("Name: " + character.name() +
+                "\nHeight: " + character.height() + "cm" +
+                "\nWeight: " + character.weight() + "kg" +
+                "\nStrength: " + character.strength() +
+                "\nAgility: " + character.agility() +
+                "\nIntelligence: " + character.intelligence() +
+                "\nCoordination: " + character.coordination() +
+                "\nLeadership: " + character.leadership(), logic.StoreLoadSortingBinarySearch.loadGameCharacterInformation(StoreLoadSortingBinarySearch.readInput()));
     }
 
     @Test

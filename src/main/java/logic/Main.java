@@ -1,12 +1,15 @@
 package logic;
 
-import java.util.*;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.lang.reflect.*;
 
 public class Main {
     static Scanner scanner = new Scanner(System.in);
+
+    public static String helloWorld() {
+        return "Hello World!";
+    }
 
     public static void main(String args[]) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
 //        System.out.println(storeGameCharacterInformation());
@@ -16,36 +19,36 @@ public class Main {
     }
 
     public static GameCharacter loadGameCharacterInformation() {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         System.out.print("Enter name: " );
         String name = readInput();
         for(int i = 0 ; i < characters.getSize(); i++) {
-            if (characters.get(i).getName().equalsIgnoreCase(name)) return characters.get(i);
+            if (characters.get(i).name().equalsIgnoreCase(name)) return characters.get(i);
         }
         return null;
     }
 
     public static GameCharacter storeGameCharacterInformation() {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         System.out.print("Enter name: " );
         String name = readInput();
         System.out.print("Enter characteristics: ");
         int[] intArray = Arrays.stream(readInput().split(" ")).mapToInt(Integer::parseInt).toArray();
         GameCharacter character = new GameCharacter(name, intArray[0], intArray[1], intArray[2], intArray[3], intArray[4], intArray[5], intArray[6]);
         for(int i = 0 ; i < characters.getSize(); i++) {
-            if (characters.get(i).getName().equalsIgnoreCase(name)) {
+            if (characters.get(i).name().equalsIgnoreCase(name)) {
                 characters.set(characters.indexOf(characters.get(i)), character);
-                FileHandling.writeInFile(characters, "myjson.json");
+                CharacterList.writeToFile("myjson.json");
                 return character;
             }
         }
         characters.add(character);
-        FileHandling.writeInFile(characters, "myjson.json");
+        CharacterList.writeToFile("myjson.json");
         return character;
     }
 
     public static String sortingAttribute() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         System.out.print("Sorting attribute: ");
         String input = readInput();
         Method n = GameCharacter.class.getDeclaredMethod("getName");
@@ -62,7 +65,7 @@ public class Main {
     }
 
     public static String binarySearch() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         LinkedList<GameCharacter> outputList;
         Method n = GameCharacter.class.getDeclaredMethod("getName");
         String str = "";

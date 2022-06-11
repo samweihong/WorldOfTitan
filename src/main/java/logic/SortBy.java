@@ -6,37 +6,37 @@ public enum SortBy implements Comparator<GameCharacter> {
 
     Height {
         public int compare(GameCharacter c1, GameCharacter c2) {
-            return Integer.compare(c2.getHeight(), c1.getHeight());
+            return Integer.compare(c2.height(), c1.height());
         }
     },
     Weight {
         public int compare(GameCharacter c1, GameCharacter c2) {
-            return Integer.compare(c2.getWeight(), c1.getWeight());
+            return Integer.compare(c2.weight(), c1.weight());
         }
     },
     Strength {
         public int compare(GameCharacter c1, GameCharacter c2) {
-            return Integer.compare(c2.getStrength(), c1.getStrength());
+            return Integer.compare(c2.strength(), c1.strength());
         }
     },
     Agility{
         public int compare(GameCharacter c1, GameCharacter c2) {
-            return Integer.compare(c2.getAgility(), c1.getAgility());
+            return Integer.compare(c2.agility(), c1.agility());
         }
     },
     Intelligence {
         public int compare(GameCharacter c1, GameCharacter c2) {
-            return Integer.compare(c2.getIntelligence(), c1.getIntelligence());
+            return Integer.compare(c2.intelligence(), c1.intelligence());
         }
     },
     Coordination {
         public int compare(GameCharacter c1, GameCharacter c2) {
-            return Integer.compare(c2.getCoordination(), c1.getCoordination());
+            return Integer.compare(c2.coordination(), c1.coordination());
         }
     },
     Leadership {
         public int compare(GameCharacter c1, GameCharacter c2) {
-            return Integer.compare(c2.getLeadership(), c1.getLeadership());
+            return Integer.compare(c2.leadership(), c1.leadership());
         }
     }
 }

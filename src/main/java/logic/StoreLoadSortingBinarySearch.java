@@ -16,30 +16,30 @@ public class StoreLoadSortingBinarySearch {
     }
 
     public static GameCharacter loadGameCharacterInformation(String name) {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         for(int i = 0 ; i < characters.getSize(); i++) {
-            if (characters.get(i).getName().equalsIgnoreCase(name)) return characters.get(i);
+            if (characters.get(i).name().equalsIgnoreCase(name)) return characters.get(i);
         }
         return null;
     }
 
     public static GameCharacter storeGameCharacterInformation(String name, int[] intArray) {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         GameCharacter character = new GameCharacter(name, intArray[0], intArray[1], intArray[2], intArray[3], intArray[4], intArray[5], intArray[6]);
         for(int i = 0 ; i < characters.getSize(); i++) {
-            if (characters.get(i).getName().equalsIgnoreCase(name)) {
+            if (characters.get(i).name().equalsIgnoreCase(name)) {
                 characters.set(characters.indexOf(characters.get(i)), character);
-                FileHandling.writeInFile(characters, "myjson.json");
+                CharacterList.writeToFile("myjson.json");
                 return character;
             }
         }
         characters.add(character);
-        FileHandling.writeInFile(characters, "myjson.json");
+        CharacterList.writeToFile("myjson.json");
         return character;
     }
 
     public static String sortingAttribute(String input) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         Method n = GameCharacter.class.getDeclaredMethod("getName");
         Method m = GameCharacter.class.getDeclaredMethod("get" + input);
         m.setAccessible(true);
@@ -54,7 +54,7 @@ public class StoreLoadSortingBinarySearch {
     }
 
     public static String binarySearch(String ability, int value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        LinkedList<GameCharacter> characters = FileHandling.getCharacterList();
+        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
         LinkedList<GameCharacter> outputList;
         Method n = GameCharacter.class.getDeclaredMethod("getName");
         String str = "";

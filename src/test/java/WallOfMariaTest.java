@@ -1,4 +1,3 @@
-import logic.Queue;
 import logic.WallOfMaria;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class WallOfMariaTest {
 
-    @Test
+    @Test @SuppressWarnings("ConstantConditions")
     void testGetWeakestPoints() {
         Queue<List<List<Integer>>> data = getTestData();
         assertNotNull(data);

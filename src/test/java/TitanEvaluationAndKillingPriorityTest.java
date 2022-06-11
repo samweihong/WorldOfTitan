@@ -1,8 +1,6 @@
-import logic.Queue;
 import logic.Titan;
 import logic.TitanEvaluationAndKillingPriority;
 import org.junit.jupiter.api.Test;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -11,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TitanEvaluationAndKillingPriorityTest {
 
-    @Test
+    @Test @SuppressWarnings("ConstantConditions")
     void testEvaluateDangerRisk() {
         Queue<List<Titan>> data = getTestData();
         assertNotNull(data);
@@ -23,6 +21,7 @@ class TitanEvaluationAndKillingPriorityTest {
         assertEquals(List.of(8), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
         assertEquals(Arrays.asList(15, 10), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
         assertEquals(Arrays.asList(15, 5, 12), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
+        assertTrue(data.isEmpty());
     }
 
     private Queue<List<Titan>> getTestData() {
