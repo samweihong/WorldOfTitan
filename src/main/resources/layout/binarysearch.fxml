@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BinarySearchController">
+   <children>
+      <Text layoutX="148.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Finding ability :" wrappingWidth="129.21630859375" />
+      <Text layoutX="148.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="value:" wrappingWidth="81.75732421875" />
+      <VBox fx:id="box" layoutX="147.0" layoutY="145.0" prefHeight="200.0" prefWidth="273.0" />
+      <TextField fx:id="abilityTextField" layoutX="259.0" layoutY="71.0" />
+      <TextField fx:id="valueTextField" layoutX="259.0" layoutY="105.0" />
+   </children>
+</AnchorPane>
