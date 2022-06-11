@@ -1,4 +1,6 @@
-package logic;
+package collections;
+
+import logic.GameCharacter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -46,6 +48,10 @@ public class LinkedList<E> implements Iterable<E> {
 
     public int getSize() {
         return size;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
     }
 
     public void addFirst(E e) {
@@ -232,74 +238,41 @@ public class LinkedList<E> implements Iterable<E> {
         return a;
     }
 
-    public LinkedList<E> binarySearchList(String ability, int value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    @SuppressWarnings("ConstantConditions")
+    public LinkedList<E> binarySearchList(String attribute, int value) {
         LinkedList<E> outputList = new LinkedList<>();
-        Node<E> firstNode = firstNodeBinarySearch(ability, value);
-        Node<E> lastNode = lastNodeBinarySearch(ability, value);
-        for (Node<E> node = firstNode; node != lastNode.next; node = node.next) {
+        Node<E> firstNode = binarySearch(attribute, value, true);
+        if (firstNode == null) return outputList;
+        Node<E> lastNode = binarySearch(attribute, value, false);
+        for (Node<E> node = firstNode; node != lastNode.next; node = node.next)
             outputList.add(node.element);
-        }
         return outputList;
     }
 
-    public Node<E> firstNodeBinarySearch(String ability, int value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method m = GameCharacter.class.getDeclaredMethod("get" + ability);
+    private Node<E> binarySearch(String attribute, int value, boolean first) {
         Node<E> start = head;
         Node<E> last = null;
-        Node<E> firstNode = null;
-        do {
-            Node<E> mid = middleNode(start, last);
-            if (mid == null) firstNode = null; // If middle is empty
-            // If value is present at mid
-            if (m.invoke(mid.element).equals(value)) {
-                firstNode = mid;
-                last = mid;
+        Node<E> node = null;
+        try {
+            Method m = GameCharacter.class.getMethod(attribute.toLowerCase());
+            while (start != last) {
+                Node<E> mid = getMiddle(start, last);
+                if (mid == null) return null;
+                // If value is present at mid
+                if (m.invoke(mid.element).equals(value)) {
+                    node = mid;
+                    if (first) last = mid;
+                    else start = mid.next;
+                }
+                // If the value is less than mid
+                else if (value < (Integer) m.invoke(mid.element)) start = mid.next;
+                // If the value is more than mid
+                else last = mid;
             }
-            // If value is less than mid
-            else if (value < (Integer) m.invoke(mid.element)) {
-                start = mid.next;
-            }
-            // If the value is more than mid
-            else last = mid;
-        } while (last == null || last != start);
-        return firstNode;
-    }
-
-    public Node<E> lastNodeBinarySearch(String ability, int value) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        Method m = GameCharacter.class.getDeclaredMethod("get" + ability);
-        Node<E> start = head;
-        Node<E> last = null;
-        Node<E> lastNode = null;
-        do {
-            Node<E> mid = middleNode(start, last);
-            if (mid == null) lastNode = null; // If middle is empty
-            // If value is present at mid
-            if (m.invoke(mid.element).equals(value)) {
-                lastNode = mid;
-                start = mid.next;
-            }
-            // If value is less than mid
-            else if (value < (Integer) m.invoke(mid.element)) {
-                start = mid.next;
-            }
-            // If the value is more than mid
-            else last = mid;
-        } while (last == null || last != start);
-        return lastNode;
-    }
-
-    private Node<E> middleNode(Node<E> start, Node<E> last) {
-        if (start == null) return null;
-        Node<E> slow = start;
-        Node<E> fast = start.next;
-        while (fast != last) {
-            fast = fast.next;
-            if (fast != last) {
-                slow = slow.next;
-                fast = fast.next;
-            }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            throw new RuntimeException(e);
         }
-        return slow;
+        return node;
     }
 
     public void sort(Comparator<? super E> comp) {
@@ -340,6 +313,7 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     // Utility function to get the middle of the linked list
+
     private Node<E> getMiddle(Node<E> head) {
         if (head == null) return null;
         Node<E> slow = head;
@@ -349,5 +323,28 @@ public class LinkedList<E> implements Iterable<E> {
             fast = fast.next.next;
         }
         return slow;
+    }
+
+    private Node<E> getMiddle(Node<E> start, Node<E> last) {
+        if (start == null) return null;
+        Node<E> slow = start;
+        Node<E> fast = start.next;
+        while (fast != last) {
+            fast = fast.next;
+            if (fast != last) {
+                slow = slow.next;
+                fast = fast.next;
+            }
+        }
+        return slow;
+//        if (head == null) return null;
+//        if (tail == null) return getMiddle(head);
+//        Node<E> slow = head;
+//        Node<E> fast = head;
+//        while (fast != null && fast != tail && fast.next != null && fast.next != tail.next) {
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        }
+//        return slow;
     }
 }

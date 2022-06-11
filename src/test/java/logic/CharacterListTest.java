@@ -1,9 +1,10 @@
+package logic;
+
 import logic.GameCharacter;
 import logic.GameCharacterList;
 
-import logic.LinkedList;
+import collections.LinkedList;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

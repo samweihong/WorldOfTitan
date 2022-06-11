@@ -1,3 +1,5 @@
+package logic;
+
 import logic.WallOfMaria;
 import org.junit.jupiter.api.Test;
 

@@ -1,3 +1,5 @@
+package logic;
+
 import logic.Titan;
 import logic.TitanEvaluationAndKillingPriority;
 import org.junit.jupiter.api.Test;
