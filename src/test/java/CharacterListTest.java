@@ -1,5 +1,5 @@
 import logic.GameCharacter;
-import logic.CharacterList;
+import logic.GameCharacterList;
 
 import logic.LinkedList;
 import org.junit.jupiter.api.AfterAll;
@@ -16,15 +16,15 @@ class CharacterListTest {
     void testWriteToFile() {
         GameCharacter gameCharacter1 = new GameCharacter("Test1", 185, 95, 9, 7, 7, 10, 8);
         GameCharacter gameCharacter2 = new GameCharacter("Test2", 100, 10, 1, 2, 3, 4, 5);
-        CharacterList.getCharacterList().add(gameCharacter1);
-        CharacterList.getCharacterList().add(gameCharacter2);
-        CharacterList.writeToFile(PATH);
+        GameCharacterList.getGameCharacterList().add(gameCharacter1);
+        GameCharacterList.getGameCharacterList().add(gameCharacter2);
+        GameCharacterList.writeToFile(PATH);
     }
 
     @Test
     void readFromFile() {
-        CharacterList.readFromFile(PATH);
-        LinkedList<GameCharacter> characterList = CharacterList.getCharacterList();
+        GameCharacterList.readFromFile(PATH);
+        LinkedList<GameCharacter> characterList = GameCharacterList.getGameCharacterList();
         assertEquals("Test1", characterList.get(0).name());
         assertEquals("Test2", characterList.get(1).name());
         assertEquals(95, characterList.get(0).weight());

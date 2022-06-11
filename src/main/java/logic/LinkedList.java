@@ -3,11 +3,30 @@ package logic;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Comparator;
+import java.util.Iterator;
 
-public class LinkedList<E> {
+public class LinkedList<E> implements Iterable<E> {
     private Node<E> head;
     private Node<E> tail;
     private int size;
+
+    @Override
+    public Iterator<E> iterator() {
+        return new Iterator<>() {
+            Node<E> current = head;
+            @Override
+            public boolean hasNext() {
+                return current != null;
+            }
+
+            @Override
+            public E next() {
+                E currentElement = current.element;
+                current = current.next;
+                return currentElement;
+            }
+        };
+    }
 
     private static class Node<E> {
         E element;
@@ -283,16 +302,14 @@ public class LinkedList<E> {
         return slow;
     }
 
-    public void sortList(Comparator<E> comp) {
-        head = mergeSort(head, comp);
-        Node<E> current = head;
-        while(current.next != null) {
-            current = current.next;
-        }
-        tail = current;
+    public void sort(Comparator<? super E> comp) {
+        head = sort(head, comp);
+        Node<E> tail = head;
+        while (tail.next != null)
+            tail = tail.next;
     }
 
-    public Node<E> mergeSort(Node<E> head, Comparator<E> comp) {
+    private Node<E> sort(Node<E> head, Comparator<? super E> comp) {
         // Base case : if head is null
         if (head == null || head.next == null) return head;
         // Get the middle of the list
@@ -301,34 +318,32 @@ public class LinkedList<E> {
         // Set the next of middle node to null
         middle.next = null;
         // Apply mergeSort on left list
-        Node<E> left = mergeSort(head, comp);
+        Node<E> left = sort(head, comp);
         // Apply mergeSort on right list
-        Node<E> right = mergeSort(nextOfMiddle, comp);
+        Node<E> right = sort(nextOfMiddle, comp);
         // Merge the left and right lists
-        Node<E> sortedlist = merge(left, right, comp);
-        return sortedlist;
+        return merge(left, right, comp);
     }
 
-    private Node<E> merge(Node<E> a, Node<E> b, Comparator<E> comp) {
-        Node<E> result = null;
+    private Node<E> merge(Node<E> a, Node<E> b, Comparator<? super E> comp) {
         /* Base cases */
         if (a == null) return b;
         if (b == null) return a;
         /* Pick either a or b, and recurse */
         if (comp.compare(a.element, b.element) < 0) {
-            result = a;
-            result.next = merge(a.next, b, comp);
+            a.next = merge(a.next, b, comp);
+            return a;
         } else {
-            result = b;
-            result.next = merge(a, b.next, comp);
+            b.next = merge(a, b.next, comp);
+            return b;
         }
-        return result;
     }
-    // Utility function to get the middle of the linked list
 
+    // Utility function to get the middle of the linked list
     private Node<E> getMiddle(Node<E> head) {
-        if (head == null) return head;
-        Node<E> slow = head, fast = head;
+        if (head == null) return null;
+        Node<E> slow = head;
+        Node<E> fast = head;
         while (fast.next != null && fast.next.next != null) {
             slow = slow.next;
             fast = fast.next.next;

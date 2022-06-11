@@ -6,69 +6,63 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class StoreLoadSortingBinarySearch {
-    static Scanner scanner = new Scanner(System.in);
-
-    public static void main(String args[]) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-//        System.out.println(storeGameCharacterInformation());
-//        System.out.println(loadGameCharacterInformation());
-//        System.out.println(sortingAttribute());
-//        System.out.println(binarySearch());
-    }
-
-    public static GameCharacter loadGameCharacterInformation(String name) {
-        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
-        for(int i = 0 ; i < characters.getSize(); i++) {
-            if (characters.get(i).name().equalsIgnoreCase(name)) return characters.get(i);
-        }
+    @Deprecated
+    public static GameCharacter getGameCharacter(String name) {
+        LinkedList<GameCharacter> characterList = GameCharacterList.getGameCharacterList();
+        for (GameCharacter gameCharacter : characterList)
+            if (gameCharacter.name().equalsIgnoreCase(name))
+                return gameCharacter;
         return null;
     }
 
     public static GameCharacter storeGameCharacterInformation(String name, int[] intArray) {
-        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
+        LinkedList<GameCharacter> characters = GameCharacterList.getGameCharacterList();
         GameCharacter character = new GameCharacter(name, intArray[0], intArray[1], intArray[2], intArray[3], intArray[4], intArray[5], intArray[6]);
         for(int i = 0 ; i < characters.getSize(); i++) {
             if (characters.get(i).name().equalsIgnoreCase(name)) {
                 characters.set(characters.indexOf(characters.get(i)), character);
-                CharacterList.writeToFile("myjson.json");
+                GameCharacterList.writeToFile("myjson.json");
                 return character;
             }
         }
         characters.add(character);
-        CharacterList.writeToFile("myjson.json");
+        GameCharacterList.writeToFile("myjson.json");
         return character;
     }
 
-    public static String sortingAttribute(String input) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
-        Method n = GameCharacter.class.getDeclaredMethod("getName");
-        Method m = GameCharacter.class.getDeclaredMethod("get" + input);
-        m.setAccessible(true);
-        n.setAccessible(true);
-        String str = "";
-        System.out.println();
-        characters.sortList(SortBy.valueOf(input));
-        for (int i = 0; i < characters.getSize(); i++) {
-            str += n.invoke(characters.get(i)) + " " + m.invoke(characters.get(i)) + "\n";
+    public static String sortingAttribute(String attribute) {
+        LinkedList<GameCharacter> gameCharacters = GameCharacterList.getGameCharacterList();
+        GameCharacterList.sort(attribute);
+        StringBuilder str = new StringBuilder();
+        try {
+            Method attributeGetter = GameCharacter.class.getMethod(attribute.toLowerCase());
+            for (GameCharacter gameCharacter : gameCharacters) {
+                str.append(gameCharacter.name())
+                   .append(" ")
+                   .append(attributeGetter.invoke(gameCharacter)).append("\n");
+            }
+        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
         }
-        return str;
+        return str.toString();
     }
 
     public static String binarySearch(String ability, int value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        LinkedList<GameCharacter> characters = CharacterList.getCharacterList();
+        LinkedList<GameCharacter> characters = GameCharacterList.getGameCharacterList();
         LinkedList<GameCharacter> outputList;
-        Method n = GameCharacter.class.getDeclaredMethod("getName");
         String str = "";
-        characters.sortList(SortBy.valueOf(ability));
+//        characters.sortList(SortBy.valueOf(ability));
         outputList = characters.binarySearchList(ability, value);
         for (int i = 0; i < outputList.getSize(); i++) {
-            str += n.invoke(outputList.get(i)) + ", ";
+            str += outputList.get(i).name() + ", ";
         }
         return str.substring(0, str.length() - 2);
     }
 
-    public static String readInput() {
-        return scanner.nextLine();
+    public static int[] readCharacteristicsInput() {
+        Scanner scanner = new Scanner(System.in);
+        return Arrays.stream(scanner.nextLine().split(" "))
+                .mapToInt(Integer::parseInt)
+                .toArray();
     }
-
-    public static int[] readCharacteristicsInput() {return Arrays.stream(readInput().split(" ")).mapToInt(Integer::parseInt).toArray();}
 }

@@ -49,7 +49,7 @@ public class StoreLoadController {
     }
 
     private Text showOutput2() {
-        GameCharacter output2 = StoreLoadSortingBinarySearch.loadGameCharacterInformation(characterName);
+        GameCharacter output2 = StoreLoadSortingBinarySearch.getGameCharacter(characterName);
         return new Text(output2.toString());
     }
 
