@@ -50,6 +50,21 @@ public class GameCharacterList {
         return null;
     }
 
+    public static String getAttributeList(String attribute) {
+        StringBuilder str = new StringBuilder();
+        try {
+            Method attributeGetter = GameCharacter.class.getMethod(attribute.toLowerCase());
+            for (GameCharacter gameCharacter : gameCharacterList) {
+                str.append(gameCharacter.name())
+                   .append(" ")
+                   .append(attributeGetter.invoke(gameCharacter)).append("\n");
+            }
+        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+        return str.toString();
+    }
+
     public static void sort(String attribute) {
         gameCharacterList.sort(
             Comparator.comparing((o) -> {

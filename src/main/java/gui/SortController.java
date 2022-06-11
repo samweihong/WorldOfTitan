@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import logic.GameCharacterList;
 import logic.StoreLoadSortingBinarySearch;
 
 import java.lang.reflect.InvocationTargetException;
@@ -27,21 +28,14 @@ public class SortController {
     private Button getSubmitButton() {
         Button submitButton = new Button("Submit");
         submitButton.setOnAction(e -> {
-            try {
-                box.getChildren().add(showOutput());
-            } catch (InvocationTargetException ex) {
-                ex.printStackTrace();
-            } catch (NoSuchMethodException ex) {
-                ex.printStackTrace();
-            } catch (IllegalAccessException ex) {
-                ex.printStackTrace();
-            }
+            box.getChildren().add(showOutput());
         });
         return submitButton;
     }
 
-    private Text showOutput() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        String output = StoreLoadSortingBinarySearch.sortingAttribute(sorting);
+    private Text showOutput() {
+        GameCharacterList.sort(sorting);
+        String output = GameCharacterList.getAttributeList(sorting);
         return new Text(output);
     }
 }

@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import logic.GameCharacter;
+import logic.GameCharacterList;
 import logic.StoreLoadSortingBinarySearch;
 import java.util.Arrays;
 
@@ -49,7 +50,7 @@ public class StoreLoadController {
     }
 
     private Text showOutput2() {
-        GameCharacter output2 = StoreLoadSortingBinarySearch.getGameCharacter(characterName);
+        GameCharacter output2 = GameCharacterList.getGameCharacter(characterName);
         return new Text(output2.toString());
     }
 

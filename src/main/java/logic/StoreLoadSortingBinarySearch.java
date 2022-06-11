@@ -6,15 +6,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class StoreLoadSortingBinarySearch {
-    @Deprecated
-    public static GameCharacter getGameCharacter(String name) {
-        LinkedList<GameCharacter> characterList = GameCharacterList.getGameCharacterList();
-        for (GameCharacter gameCharacter : characterList)
-            if (gameCharacter.name().equalsIgnoreCase(name))
-                return gameCharacter;
-        return null;
-    }
-
     public static GameCharacter storeGameCharacterInformation(String name, int[] intArray) {
         LinkedList<GameCharacter> characters = GameCharacterList.getGameCharacterList();
         GameCharacter character = new GameCharacter(name, intArray[0], intArray[1], intArray[2], intArray[3], intArray[4], intArray[5], intArray[6]);
@@ -28,23 +19,6 @@ public class StoreLoadSortingBinarySearch {
         characters.add(character);
         GameCharacterList.writeToFile("myjson.json");
         return character;
-    }
-
-    public static String sortingAttribute(String attribute) {
-        LinkedList<GameCharacter> gameCharacters = GameCharacterList.getGameCharacterList();
-        GameCharacterList.sort(attribute);
-        StringBuilder str = new StringBuilder();
-        try {
-            Method attributeGetter = GameCharacter.class.getMethod(attribute.toLowerCase());
-            for (GameCharacter gameCharacter : gameCharacters) {
-                str.append(gameCharacter.name())
-                   .append(" ")
-                   .append(attributeGetter.invoke(gameCharacter)).append("\n");
-            }
-        } catch (InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-        return str.toString();
     }
 
     public static String binarySearch(String ability, int value) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
