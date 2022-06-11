@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import logic.GameCharacterList;
 import logic.StoreLoadSortingBinarySearch;
 
 import java.lang.reflect.InvocationTargetException;
@@ -45,7 +46,7 @@ public class BinarySearchController {
     }
 
     private Text showOutput() throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-        String output = StoreLoadSortingBinarySearch.binarySearch(ability, value);
+        String output = GameCharacterList.getSearchList(ability, value);
         return new Text(output);
     }
 }

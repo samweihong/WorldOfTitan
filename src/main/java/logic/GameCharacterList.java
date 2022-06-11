@@ -5,6 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Comparator;
 
+import collections.LinkedList;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GameCharacterList {
@@ -18,6 +19,10 @@ public class GameCharacterList {
 
     public static LinkedList<GameCharacter> getGameCharacterList() {
         return gameCharacterList;
+    }
+
+    public static void clear() {
+        gameCharacterList.clear();
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -79,8 +84,24 @@ public class GameCharacterList {
         );
     }
 
-    public static void search(String attribute, int value) {
+    public static LinkedList<GameCharacter> search(String attribute, int value) {
         sort(attribute);
-//        gameCharacterList.binarySearchList(attribute, value);
+        return gameCharacterList.binarySearchList(attribute, value);
+    }
+
+    public static String getSearchList(String attribute, int value) {
+        return formatSearchList(search(attribute, value));
+    }
+
+    private static String formatSearchList(LinkedList<GameCharacter> list) {
+        if (list.isEmpty()) return "None";
+        if (list.getSize() == 1) return list.get(0).name();
+
+        StringBuilder res = new StringBuilder();
+        res.append(list.get(0).name());
+        for (int i = 1; i < list.getSize()-1; i++)
+            res.append(", ").append(list.get(i).name());
+        res.append(" and ").append(list.get(list.getSize() - 1).name());
+        return res.toString();
     }
 }
