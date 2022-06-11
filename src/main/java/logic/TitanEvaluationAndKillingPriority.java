@@ -1,5 +1,7 @@
 package logic;
 
+import collections.PriorityQueue;
+
 import java.util.*;
 
 public class TitanEvaluationAndKillingPriority{
@@ -19,9 +21,9 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
-    public static PriorityQueue<Titan> createKillQueue(List<Titan> titans){
+    public static collections.PriorityQueue<Titan> createKillQueue(List<Titan> titans){
 
-        PriorityQueue<Titan> killQueue = new PriorityQueue<>();
+        collections.PriorityQueue<Titan> killQueue = new collections.PriorityQueue<>();
         for(int i = 0; i < titans.size(); i++){
             killQueue.enqueue(titans.get(i));
         }
@@ -29,7 +31,7 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
-    public static String killPriority(PriorityQueue<Titan> killQueue){
+    public static String killPriority(collections.PriorityQueue<Titan> killQueue){
 
         StringBuilder killSequence = new StringBuilder();
         for(int i = 0; i < killQueue.getSize(); i++){
@@ -41,7 +43,7 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
-    public static int calculateDistance(PriorityQueue<Titan> killQueue){
+    public static int calculateDistance(collections.PriorityQueue<Titan> killQueue){
 
         int totalDistance = 0;
         int currentNode = 0;

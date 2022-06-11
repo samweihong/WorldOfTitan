@@ -7,7 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import logic.GameCharacter;
 import logic.GameCharacterList;
-import logic.StoreLoadSortingBinarySearch;
+
 import java.util.Arrays;
 
 public class StoreLoadController {
@@ -45,7 +45,7 @@ public class StoreLoadController {
     }
 
     private Text showOutput() {
-        GameCharacter output = StoreLoadSortingBinarySearch.storeGameCharacterInformation(characterName, readCharacteristicsInput(characteristics));
+        GameCharacter output = GameCharacterList.addGameCharacter(characterName, readCharacteristicsInput(characteristics));
         return new Text(output.toString());
     }
 

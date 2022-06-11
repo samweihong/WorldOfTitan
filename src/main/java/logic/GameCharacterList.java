@@ -1,12 +1,13 @@
 package logic;
 
-import java.io.*;
+import collections.LinkedList;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Comparator;
-
-import collections.LinkedList;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class GameCharacterList {
     private static final LinkedList<GameCharacter> gameCharacterList = new LinkedList<>();
@@ -46,6 +47,18 @@ public class GameCharacterList {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static GameCharacter addGameCharacter(String name, int[] characteristics) {
+        GameCharacter character = new GameCharacter(name, characteristics[0], characteristics[1], characteristics[2], characteristics[3], characteristics[4], characteristics[5], characteristics[6]);
+        for (int i = 0; i < gameCharacterList.getSize(); i++) {
+            if (gameCharacterList.get(i).name().equalsIgnoreCase(name)) {
+                gameCharacterList.set(i, character);
+                return character;
+            }
+        }
+        gameCharacterList.add(character);
+        return character;
     }
 
     public static GameCharacter getGameCharacter(String name) {
