@@ -7,10 +7,13 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class GameCharacterList {
     private static final LinkedList<GameCharacter> gameCharacterList = new LinkedList<>();
+    private static final String DEFAULT_PATH = "src/main/resources/data/game_characters.json";
 
     static {
         readFromFile("src/main/resources/data/game_characters.json");
@@ -26,6 +29,10 @@ public class GameCharacterList {
         gameCharacterList.clear();
     }
 
+    public static void writeToFile() {
+        writeToFile(DEFAULT_PATH);
+    }
+
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void writeToFile(String path) {
         try {
@@ -36,6 +43,10 @@ public class GameCharacterList {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static void readFromFile() {
+        readFromFile(DEFAULT_PATH);
     }
 
     public static void readFromFile(String path) {
@@ -116,5 +127,47 @@ public class GameCharacterList {
             res.append(", ").append(list.get(i).name());
         res.append(" and ").append(list.get(list.getSize() - 1).name());
         return res.toString();
+    }
+
+    public static void main(String[] args) {
+        gameCharacterList.clear();
+        gameCharacterIO();
+        sort();
+        search();
+    }
+
+    private static void gameCharacterIO() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter name: ");
+        String name = scanner.nextLine();
+        System.out.print("Enter characteristics: ");
+        int[] characteristics = Arrays.stream(scanner.nextLine().split(" "))
+                                    .mapToInt(Integer::parseInt)
+                                    .toArray();
+        addGameCharacter(name, characteristics);
+        System.out.println();
+        System.out.println(gameCharacterList.get(0));
+    }
+
+    private static void sort() {
+        readFromFile();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Sorting attribute: ");
+        String attribute = scanner.nextLine();
+        sort(attribute);
+        System.out.println();
+        System.out.println(getAttributeList(attribute));
+    }
+
+    private static void search() {
+        readFromFile();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Finding ability : ");
+        String attribute = scanner.nextLine();
+        System.out.println();
+        System.out.print("value: ");
+        int value = scanner.nextInt();
+        System.out.println();
+        System.out.println("Soldier : " + getSearchList(attribute, value));
     }
 }
