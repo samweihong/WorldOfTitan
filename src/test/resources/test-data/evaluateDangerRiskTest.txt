@@ -1,14 +1,15 @@
 3
-War Hammer Titan
+Nine Titan (War Hammer Titan)
 Normal Titan (25m, 4 legs, 15ms, Repeated pattern, Can climb)
 Abnormal Titan
 
 2
-Female Titan
+
+Nine Titan (Female Titan)
 Abnormal Titan
 
 1
-Beast Titan
+Nine Titan (Beast Titan)
 
 1
 Abnormal Titan

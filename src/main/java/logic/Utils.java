@@ -14,4 +14,16 @@ public class Utils {
         res.append(" and ").append(list.get(list.size() - 1));
         return res.toString();
     }
+
+    public static String toTitleCase(Enum<?> e) {
+        StringBuilder titleCase = new StringBuilder(e.toString().toLowerCase());
+        titleCase.setCharAt(0, Character.toUpperCase(titleCase.charAt(0)));
+        for (int i = 1; i < titleCase.length(); i++) {
+            if (titleCase.charAt(i) == '_') {
+                titleCase.setCharAt(i, ' ');
+                titleCase.setCharAt(++i, Character.toUpperCase(titleCase.charAt(i)));
+            }
+        }
+        return titleCase.toString();
+    }
 }

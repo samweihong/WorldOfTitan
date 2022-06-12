@@ -1,4 +1,6 @@
-import logic.Titan;
+package logic;
+
+import data_objects.Titan;
 import logic.TitanEvaluationAndKillingPriority;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TitanEvaluationAndKillingPriorityTest {
 
-    @Test
+    @Test @SuppressWarnings("ConstantConditions")
     void testEvaluateDangerRisk() {
         Queue<List<Titan>> data = getTestData();
         assertNotNull(data);
@@ -23,6 +25,7 @@ class TitanEvaluationAndKillingPriorityTest {
         assertEquals(List.of(8), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
         assertEquals(Arrays.asList(15, 10), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
         assertEquals(Arrays.asList(15, 5, 12), TitanEvaluationAndKillingPriority.evaluateDangerRisk(data.poll()));
+        assertTrue(data.isEmpty());
     }
 
     private Queue<List<Titan>> getTestData() {
@@ -34,7 +37,7 @@ class TitanEvaluationAndKillingPriorityTest {
                 input.nextLine();
                 for (int i = 0; i < noOfTitans; i++) {
                     String titan = input.nextLine();
-                    unitTest.add(Titan.toTitan(titan));
+                    unitTest.add(Titan.generateTitan(titan));
                 }
                 data.offer(unitTest);
             }
