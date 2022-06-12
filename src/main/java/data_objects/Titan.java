@@ -1,4 +1,4 @@
-package logic;
+package data_objects;
 
 import java.util.Random;
 
@@ -6,6 +6,8 @@ public abstract class Titan implements Comparable<Titan> {
     protected TitanType titanType;
     protected int risk;
     protected int index;
+
+    private static final Random random = new Random();
 
     protected enum TitanType {
         NORMAL_TITAN,
@@ -26,16 +28,12 @@ public abstract class Titan implements Comparable<Titan> {
     public int getIndex() { return index; }
     public void setIndex(int index) { this.index = index; }
 
-    // 60% Normal Titan, 10% Abnormal Titan, 30% Nine Titan
+    // 65% Normal Titan, 15% Abnormal Titan, 20% Nine Titan
     public static Titan generateTitan() {
-        Random random = new Random();
         int p = random.nextInt(100);
-        if (p < 60)
-            return new NormalTitan();
-        else if (p < 70)
-            return new AbnormalTitan();
-        else
-            return new NineTitan();
+        if (p < 65)      return new NormalTitan();
+        else if (p < 80) return new AbnormalTitan();
+        else             return new NineTitan();
     }
 
     @Override

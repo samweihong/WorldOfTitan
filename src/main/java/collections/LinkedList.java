@@ -1,6 +1,6 @@
 package collections;
 
-import logic.GameCharacter;
+import data_objects.GameCharacter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

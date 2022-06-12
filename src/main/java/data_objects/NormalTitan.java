@@ -1,4 +1,4 @@
-package logic;
+package data_objects;
 
 import java.util.Random;
 import java.util.regex.Matcher;

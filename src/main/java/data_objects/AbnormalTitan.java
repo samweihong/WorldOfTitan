@@ -1,4 +1,4 @@
-package logic;
+package data_objects;
 
 public class AbnormalTitan extends Titan {
     private static final int risk = 15;

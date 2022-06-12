@@ -1,6 +1,7 @@
 package logic;
 
 import collections.PriorityQueue;
+import data_objects.Titan;
 
 import java.util.*;
 
