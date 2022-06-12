@@ -1,26 +1,26 @@
 3
-War Hammer logic.Titan
-Normal logic.Titan (25m, 4 legs, 15ms, Repeated pattern, Can climb)
-Abnormal logic.Titan
+Nine Titan (War Hammer Titan)
+Normal Titan (25m, 4 legs, 15ms, Repeated pattern, Can climb)
+Abnormal Titan
 
 2
-Female logic.Titan
-Abnormal logic.Titan
+Nine Titan (Female Titan)
+Abnormal Titan
 
 1
-Beast logic.Titan
+Nine Titan (Beast Titan)
 
 1
-Abnormal logic.Titan
+Abnormal Titan
 
 1
-Normal logic.Titan (8m, 2 legs, 3ms, Normal pattern, Can climb)
+Normal Titan (8m, 2 legs, 3ms, Normal pattern, Can climb)
 
 2
-Abnormal logic.Titan
-Normal logic.Titan (30m, 0 legs, 30ms, Repeated pattern, Cannot climb)
+Abnormal Titan
+Normal Titan (30m, 0 legs, 30ms, Repeated pattern, Cannot climb)
 
 3
-Normal logic.Titan (30m, 4 legs, 30ms, Not repeated pattern, Can climb)
-Normal logic.Titan (0m, 0 legs, 0ms, Normal pattern, Cannot climb)
-Normal logic.Titan (25m, 2 legs, 15ms, Repeated pattern, Can climb)
+Normal Titan (30m, 4 legs, 30ms, Not repeated pattern, Can climb)
+Normal Titan (0m, 0 legs, 0ms, Normal pattern, Cannot climb)
+Normal Titan (25m, 2 legs, 15ms, Repeated pattern, Can climb)

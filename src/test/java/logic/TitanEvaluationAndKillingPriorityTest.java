@@ -35,7 +35,7 @@ class TitanEvaluationAndKillingPriorityTest {
                 input.nextLine();
                 for (int i = 0; i < noOfTitans; i++) {
                     String titan = input.nextLine();
-                    unitTest.add(Titan.toTitan(titan));
+                    unitTest.add(Titan.generateTitan(titan));
                 }
                 data.offer(unitTest);
             }

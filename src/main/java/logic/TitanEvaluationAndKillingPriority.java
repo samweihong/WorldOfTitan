@@ -12,7 +12,7 @@ public class TitanEvaluationAndKillingPriority{
         for(int i = 0; i < titans.size(); i++){
 
             Titan titan = titans.get(i);
-            int risk = titan.evaluateRisk(titan.toString());
+            int risk = titan.getRisk();
             dangerRisks.add(risk);
 
         }
@@ -21,9 +21,9 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
-    public static collections.PriorityQueue<Titan> createKillQueue(List<Titan> titans){
+    public static PriorityQueue<Titan> createKillQueue(List<Titan> titans){
 
-        collections.PriorityQueue<Titan> killQueue = new collections.PriorityQueue<>();
+        PriorityQueue<Titan> killQueue = new PriorityQueue<>();
         for(int i = 0; i < titans.size(); i++){
             killQueue.enqueue(titans.get(i));
         }
@@ -31,7 +31,7 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
-    public static String killPriority(collections.PriorityQueue<Titan> killQueue){
+    public static String killPriority(PriorityQueue<Titan> killQueue){
 
         StringBuilder killSequence = new StringBuilder();
         for(int i = 0; i < killQueue.getSize(); i++){
@@ -43,7 +43,7 @@ public class TitanEvaluationAndKillingPriority{
 
     }
 
-    public static int calculateDistance(collections.PriorityQueue<Titan> killQueue){
+    public static int calculateDistance(PriorityQueue<Titan> killQueue){
 
         int totalDistance = 0;
         int currentNode = 0;
@@ -69,11 +69,11 @@ public class TitanEvaluationAndKillingPriority{
         List<Titan> titanList = new ArrayList<>();
         System.out.printf("Generating %d Titans ...\n", noOfTitans);
         for(int i = 1; i <= noOfTitans; i++){
-            Titan titan = new Titan();
+            Titan titan = Titan.generateTitan();
             titan.setIndex(i);
             titanList.add(titan);
             System.out.printf("logic.Titan %d: %s\n", i, titan);
-            dangerRiskList.add(titan.evaluateRisk(titan.toString()));
+            dangerRiskList.add(titan.getRisk());
         }
 
         System.out.println();
