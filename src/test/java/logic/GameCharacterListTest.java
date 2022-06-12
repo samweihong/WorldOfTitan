@@ -1,6 +1,7 @@
 package logic;
 
 import collections.LinkedList;
+import data_objects.GameCharacter;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -2,6 +2,7 @@ package logic;
 
 import collections.LinkedList;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import data_objects.GameCharacter;
 
 import java.io.File;
 import java.io.IOException;

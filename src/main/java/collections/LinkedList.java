@@ -1,6 +1,6 @@
 package collections;
 
-import logic.GameCharacter;
+import data_objects.GameCharacter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -34,8 +34,6 @@ public class LinkedList<E> implements Iterable<E> {
         E element;
         Node<E> next;
 
-        public Node() {}
-
         public Node(E element) {
             this.element = element;
         }
@@ -58,15 +56,14 @@ public class LinkedList<E> implements Iterable<E> {
         Node<E> newHead = new Node<>(e);
         newHead.next = head;
         head = newHead;
-        size++;
         if(tail == null) tail = head;
+        size++;
     }
 
     public void addLast(E e) {
         Node<E> newTail = new Node<>(e);
-        if(tail == null) {
+        if (tail == null)
             head = tail = newTail;
-        }
         else {
             tail.next = newTail;
             tail = newTail;
@@ -75,17 +72,12 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     public void add(int index, E e) {
-        if(index == 0) {
-            addFirst(e);
-        }
-        else if(index >= size) {
-            addLast(e);
-        }
+        if (index == 0) addFirst(e);
+        else if (index >= size) addLast(e);
         else {
             Node<E> current = head;
-            for(int i=1; i<index; i++) {
+            for(int i = 1; i < index; i++)
                 current = current.next;
-            }
             Node<E> newNode = new Node<>(e);
             newNode.next = current.next;
             current.next = newNode;
@@ -94,46 +86,41 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     public E removeFirst() {
-        if(size == 0) return null;
-        else {
-            E element = head.element;
-            head = head.next;
-            size--;
-            if (head == null) tail = null;
-            return element;
-        }
+        if (size == 0) return null;
+
+        E element = head.element;
+        head = head.next;
+        if (head == null) tail = null;
+        size--;
+        return element;
     }
 
     public E removeLast() {
-        if(size == 0) return null;
-        else if (size == 1) return removeFirst();
-        else {
-            E element = tail.element;
-            Node<E> current = head;
-            while (current.next.next != null) {
-                current = current.next;
-            }
-            current.next = null;
-            tail = current;
-            size--;
-            return element;
-        }
+        if (size == 0) return null;
+        if (size == 1) return removeFirst();
+
+        E element = tail.element;
+        Node<E> current = head;
+        while (current.next.next != null)
+            current = current.next;
+        current.next = null;
+        tail = current;
+        size--;
+        return element;
     }
 
     public E remove(int index) {
-        if(index < 0 || index >= size) return null;
-        else if(index == 0) return removeFirst();
-        else if(index == size - 1) return removeLast();
-        else {
-            Node<E> current = head;
-            for (int i=1; i < index; i++) {
-                current = current.next;
-            }
-            E element = current.next.element;
-            current.next = current.next.next;
-            size--;
-            return element;
-        }
+        if (index < 0 || index >= size) return null;
+        if (index == 0) return removeFirst();
+        if (index == size - 1) return removeLast();
+
+        Node<E> current = head;
+        for (int i = 1; i < index; i++)
+            current = current.next;
+        E element = current.next.element;
+        current.next = current.next.next;
+        size--;
+        return element;
     }
 
     public void add(E e) {
@@ -141,36 +128,31 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     public boolean contains(E e) {
-        Node<E> current = head;
-        for(int i=0; i<size; i++) {
-            if(current.element.equals(e)) {
+        for (Node<E> current = head; current != null; current = current.next)
+            if (current.element.equals(e))
                 return true;
-            }
-            current = current.next;
-        }
         return false;
     }
 
     public E getFirst() {
-        if(head == null) return null;
+        if (head == null) return null;
         return head.element;
     }
 
     public E getLast() {
-        if(tail == null) return null;
+        if (tail == null) return null;
         return tail.element;
     }
 
     public E get(int index) {
-        if (index < 0 || index >= size) return null; //invalid index
-        else if (index == 0) return getFirst();
-        else if (index == size - 1) return getLast();
-        else {
-            Node<E> current = head;
-            for (int i=0; i<index; i++)
-                current = current.next;
-            return current.element;
-        }
+        if (index < 0 || index >= size) return null;
+        if (index == 0) return getFirst();
+        if (index == size - 1) return getLast();
+
+        Node<E> current = head;
+        for (int i = 0; i < index; i++)
+            current = current.next;
+        return current.element;
     }
 
     public int indexOf(E e) {
@@ -212,11 +194,10 @@ public class LinkedList<E> implements Iterable<E> {
 
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
         for (Node<E> current = head; current != null; current = current.next)
-            str += current.element + "\n";
-        System.out.println();
-        return str;
+            str.append(current.element).append("\n");
+        return str.toString();
     }
 
     public Object[] toArray() {
@@ -313,7 +294,6 @@ public class LinkedList<E> implements Iterable<E> {
     }
 
     // Utility function to get the middle of the linked list
-
     private Node<E> getMiddle(Node<E> head) {
         if (head == null) return null;
         Node<E> slow = head;
@@ -325,26 +305,14 @@ public class LinkedList<E> implements Iterable<E> {
         return slow;
     }
 
-    private Node<E> getMiddle(Node<E> start, Node<E> last) {
-        if (start == null) return null;
-        Node<E> slow = start;
-        Node<E> fast = start.next;
-        while (fast != last) {
-            fast = fast.next;
-            if (fast != last) {
-                slow = slow.next;
-                fast = fast.next;
-            }
+    private Node<E> getMiddle(Node<E> head, Node<E> tail) {
+        if (head == null) return null;
+        Node<E> slow = head;
+        Node<E> fast = head;
+        while (fast != tail && fast.next != tail) {
+            slow = slow.next;
+            fast = fast.next.next;
         }
         return slow;
-//        if (head == null) return null;
-//        if (tail == null) return getMiddle(head);
-//        Node<E> slow = head;
-//        Node<E> fast = head;
-//        while (fast != null && fast != tail && fast.next != null && fast.next != tail.next) {
-//            slow = slow.next;
-//            fast = fast.next.next;
-//        }
-//        return slow;
     }
 }

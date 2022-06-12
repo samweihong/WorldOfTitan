@@ -1,7 +1,6 @@
 package logic;
 
-import logic.Titan;
-import logic.TitanEvaluationAndKillingPriority;
+import data_objects.Titan;
 import org.junit.jupiter.api.Test;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,7 +34,7 @@ class TitanEvaluationAndKillingPriorityTest {
                 input.nextLine();
                 for (int i = 0; i < noOfTitans; i++) {
                     String titan = input.nextLine();
-                    unitTest.add(Titan.toTitan(titan));
+                    unitTest.add(Titan.generateTitan(titan));
                 }
                 data.offer(unitTest);
             }

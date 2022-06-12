@@ -1,4 +1,4 @@
-package logic;
+package data_objects;
 
 public record GameCharacter(String name, int height, int weight, int strength, int agility, int intelligence, int coordination, int leadership) {
     @Override
