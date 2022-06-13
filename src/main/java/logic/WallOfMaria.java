@@ -4,7 +4,7 @@ import java.util.*;
 
 public class WallOfMaria {
     public static List<Integer> getWeakestPoints(List<List<Integer>> wallStructure) {
-        Map<Integer, Integer> countMap = new HashMap<>();
+        HashMap<Integer, Integer> countMap = new HashMap<>();
         int max = 0;
 
         for (List<Integer> edges : wallStructure) {
@@ -16,7 +16,7 @@ public class WallOfMaria {
         }
 
         List<Integer> res = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : countMap.entrySet())
+        for (Entry<Integer, Integer> entry : countMap.entrySet())
             if (entry.getValue() == max)
                 res.add(entry.getKey());
         Collections.sort(res);
