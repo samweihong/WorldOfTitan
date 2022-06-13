@@ -1,7 +1,10 @@
 package logic;
 
 import data_objects.Titan;
+import logic.TitanEvaluationAndKillingPriority;
 import org.junit.jupiter.api.Test;
+
+import java.util.Queue;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
