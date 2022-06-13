@@ -61,6 +61,6 @@ public class MainGUI extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
         initialiseStage();
-        loadScreen(Screen.WORD_CONVERTER);
+        loadScreen(Screen.STORE_LOAD);
     }
 }
