@@ -67,18 +67,54 @@ public class Graph{
         return optimalSolutions;
     }
 
+    public static List<List<Integer>> findHamiltonianCycle()
+
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter location of Titan: ");
-        int location = scanner.nextInt();
-        scanner.close();
+        int selection;
+        do{
+            System.out.print("""
+                            Make selection:
+                            1. Find Hamiltonian Cycle
+                            2. Find best path to kill titan
+                            
+                            Input: 
+                        """);
+            selection = scanner.nextInt();
 
 
-        // finding shortest path
-        System.out.println("Best path(s):");
-        try{ findPaths(Graph.mapOfParadis, 0, location); }
-        catch (IndexOutOfBoundsException e) { System.out.println("Location unavailable: not on Map of Paradis"); }
+            int point;
+            if(selection == 1){
+                do{
+                    System.out.print("Enter starting point: ");
+                    point = scanner.nextInt();
+
+                    if(point < 0 || point > 15) System.out.println("Starting point not on Map of Paradis");
+                    else
+                }while(point < 0 || point > 15);
+            }
+
+            else if(selection == 2){
+                System.out.print("Enter location of Titan: ");
+                int location = scanner.nextInt();
+                scanner.close();
+
+
+                // finding shortest path
+                System.out.println("Best path(s):");
+                try{ findPaths(Graph.mapOfParadis, 0, location); }
+                catch (IndexOutOfBoundsException e) { System.out.println("Location unavailable: not on Map of Paradis"); }
+            }
+
+            else{
+                System.out.println("Invalid selection!");
+            }
+
+        }while(selection != 1 && selection != 2);
+
+
+
 
     }
 }
