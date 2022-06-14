@@ -66,8 +66,44 @@ public class Graph{
         for(List<Integer> optimalSolution : optimalSolutions) System.out.println(printPath(optimalSolution));
         return optimalSolutions;
     }
+    public static void hamiltonianCycle(List<List<Integer>> map, int start, boolean[] visited, List<Integer> path, int n, int s){
 
-    public static List<List<Integer>> findHamiltonianCycle()
+        if(path.size() == n && path.get(0) == s && map.get(path.get(15)).contains(s)){
+            System.out.println();
+            System.out.println("Path found!");
+            System.out.println(printPath(path) + "-->" + s);
+            return;
+        }
+
+        for (int w: map.get(start)){
+            if (!visited[w]){
+                visited[w] = true;
+                path.add(w);
+
+                hamiltonianCycle(map, w, visited, path, n, s);
+
+                visited[w] = false;
+                path.remove(path.size() - 1);
+            }
+        }
+
+    }
+
+    public static void findHamiltonianCycle(List<List<Integer>> map, int n, int s){
+
+        for(int start = 0; start < n; start++){
+
+            List<Integer> path = new ArrayList<>();
+            path.add(start);
+
+
+            boolean[] visited = new boolean[n];
+            visited[start] = true;
+
+            hamiltonianCycle(map, start, visited, path, n, s);
+        }
+
+    }
 
     public static void main(String[] args) {
 
@@ -75,12 +111,11 @@ public class Graph{
         int selection;
         do{
             System.out.print("""
-                            Make selection:
-                            1. Find Hamiltonian Cycle
-                            2. Find best path to kill titan
-                            
-                            Input: 
-                        """);
+                        Make selection:
+                        1. Find Hamiltonian Cycle
+                        2. Find best path to kill titan
+                        
+                        Input:  """);
             selection = scanner.nextInt();
 
 
@@ -91,7 +126,7 @@ public class Graph{
                     point = scanner.nextInt();
 
                     if(point < 0 || point > 15) System.out.println("Starting point not on Map of Paradis");
-                    else
+                    else findHamiltonianCycle(mapOfParadis, 16, point);
                 }while(point < 0 || point > 15);
             }
 
@@ -112,9 +147,6 @@ public class Graph{
             }
 
         }while(selection != 1 && selection != 2);
-
-
-
 
     }
 }
