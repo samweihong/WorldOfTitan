@@ -1,4 +1,4 @@
-package logic;
+package collections;
 
 public class Entry<K, V> {
     K key;
