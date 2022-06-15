@@ -1,5 +1,7 @@
 package logic;
 
+import collections.HashMap;
+
 import java.lang.StringBuilder;
 
 public class WordConverter {

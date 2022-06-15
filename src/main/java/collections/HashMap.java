@@ -1,4 +1,4 @@
-package logic;
+package collections;
 
 public class HashMap<K, V> {
     private Entry<K, V>[] buckets; // declare an array of entry;
