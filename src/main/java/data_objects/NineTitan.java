@@ -30,11 +30,12 @@ public class NineTitan extends Titan {
     public NineTitan() {
         Random random = new Random();
         int nineTitanIndex = random.nextInt(1, 10);
-        if(nineTitanIndices.contains(nineTitanIndex)){
-            new NineTitan(NineTitanType.values()[new Random().nextInt(NineTitanType.values().length)]);
-            nineTitanIndices.remove(nineTitanIndex);
+        while(!nineTitanIndices.contains(nineTitanIndex)){
+            random.nextInt(1, 10);
         }
-        else new NineTitan();
+        this.type = NineTitanType.values()[new Random().nextInt(NineTitanType.values().length)];
+        titanType = TitanType.NINE_TITAN;
+        nineTitanIndices.remove(nineTitanIndex);
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -44,11 +45,6 @@ public class NineTitan extends Titan {
         Matcher matcher = pattern.matcher(titanInfo);
         matcher.find();
         type = NineTitanType.valueOf(matcher.group(1).toUpperCase().replace(' ', '_'));
-    }
-
-    public NineTitan(NineTitanType type) {
-        titanType = TitanType.NINE_TITAN;
-        this.type = type;
     }
 
     public NineTitanType getType() {
