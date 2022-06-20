@@ -42,9 +42,20 @@ public class TitanEvaluationAndKillingPriority {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        String name = "";
+        boolean valid = false;
+        while(!valid){
+            try{
+                System.out.print("Choose soldier: ");
+                name = scanner.nextLine();
+                if(GameCharacterList.getGameCharacter(name).name().equals(name)) valid = true;
+            }
+            catch (NullPointerException e){
+                System.out.println("Invalid input! Please try again");
+            }
+        }
 
-        System.out.print("Choose soldier: ");
-        String name = scanner.nextLine();
+
         int agility = GameCharacterList.getGameCharacter(name).agility();
         int strength = GameCharacterList.getGameCharacter(name).strength();
         int ability = agility + strength;
@@ -101,10 +112,17 @@ public class TitanEvaluationAndKillingPriority {
             System.out.printf("Current distance travelled: %d", totalDistance);
             System.out.println();
 
-            System.out.print("Detected more titans? (y/n) ");
-            scanner.nextLine();
-            char moreTitans = scanner.next().toLowerCase().charAt(0);
-            System.out.println();
+            char moreTitans;
+            do{
+                System.out.print("Detected more titans? (y/n) ");
+                scanner.nextLine();
+                moreTitans = scanner.next().toLowerCase().charAt(0);
+                System.out.println();
+
+                if(moreTitans != 'y' && moreTitans != 'n') System.out.println("Please input y or n only");
+
+            }while(moreTitans != 'y' && moreTitans != 'n');
+
 
             if(moreTitans == 'y'){
                 System.out.print("How many more? ");
