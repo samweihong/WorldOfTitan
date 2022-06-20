@@ -40,6 +40,9 @@ public class Queue<E> {
     }
 
     public String toString() {
-        return "logic.Queue: " + queue.toString();
+        return "Queue: " + queue.toString();
     }
+
+    public E remove(int index){ return queue.remove(index); }
+    public boolean remove(E e){ return queue.remove(e); }
 }

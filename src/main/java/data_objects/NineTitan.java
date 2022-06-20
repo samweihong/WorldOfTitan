@@ -25,15 +25,15 @@ public class NineTitan extends Titan {
         WAR_HAMMER_TITAN
     }
 
-    public Set<Integer> nineTitanIndices = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    public static Set<Integer> nineTitanIndices = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
     public NineTitan() {
         Random random = new Random();
         int nineTitanIndex = random.nextInt(1, 10);
         while(!nineTitanIndices.contains(nineTitanIndex)){
-            random.nextInt(1, 10);
+            nineTitanIndex = random.nextInt(1, 10);
         }
-        this.type = NineTitanType.values()[new Random().nextInt(NineTitanType.values().length)];
+        this.type = NineTitanType.values()[nineTitanIndex - 1];
         titanType = TitanType.NINE_TITAN;
         nineTitanIndices.remove(nineTitanIndex);
     }

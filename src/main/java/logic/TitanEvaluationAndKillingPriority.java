@@ -1,8 +1,10 @@
 package logic;
 
 import collections.PriorityQueue;
+import collections.Queue;
 import data_objects.GameCharacter;
 import data_objects.NineTitan;
+import data_objects.NormalTitan;
 import data_objects.Titan;
 
 import java.util.*;
@@ -45,62 +47,100 @@ public class TitanEvaluationAndKillingPriority {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        List<Integer> nineTitans = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
-
         System.out.print("Choose soldier: ");
         String name = scanner.nextLine();
         int agility = GameCharacterList.getGameCharacter(name).agility();
         int strength = GameCharacterList.getGameCharacter(name).strength();
         int ability = agility + strength;
+        int totalDistance = 0, previousIndex = 0;
 
-        List<Titan> titanList = new ArrayList<>();
-        List<Integer> dangerRiskList = new ArrayList<>();
+        System.out.println();
+        System.out.printf("%s's agility: %d\n%s's strength: %d\n%s's ability to kill titan: %d\n",
+                name, agility, name, strength, name, ability);
+        System.out.println();
+
+//        List<Titan> titanList = new ArrayList<>();
+//        Queue<Integer> dangerRiskList = new Queue<>();
         PriorityQueue<Titan> titanKillQueue = new PriorityQueue<>();
+        boolean beastTitanExists = false;
 
-        boolean moreTitans = false;
-        do{
+        System.out.print("Initial number of Titans: ");
+        int noOfTitans = scanner.nextInt();
 
-            System.out.print("Number of Titans: ");
-            int noOfTitans = scanner.nextInt();
+        System.out.println();
+        System.out.printf("Generating %d Titans ...\n", noOfTitans);
+        for (int i = 1; i <= noOfTitans; i++) {
+            Titan titan = Titan.generateTitan();
+            titan.setIndex(i);
+            titanKillQueue.enqueue(titan);
+//            dangerRiskList.enqueue(titan.getRisk());
+//            titanList.add(titan);
+            System.out.printf("Titan %d: %s\n", titan.getIndex(), titan);
+        }
+//        titanKillQueue = createKillQueue(titanList);
 
-            System.out.println();
-            System.out.printf("Generating %d Titans ...\n", noOfTitans);
-            for (int i = 1; i <= noOfTitans; i++) {
-                Titan titan = Titan.generateTitan();
-                if(titan.)
-                titan.setIndex(i);
-                titanList.add(titan);
-                System.out.printf("Titan %d: %s\n", i, titan);
-            }
-
-            dangerRiskList = evaluateDangerRisk(titanList);
+        while(!titanKillQueue.isEmpty()){
+//            titanKillQueue = createKillQueue(titanList);
+//            dangerRiskList = evaluateDangerRisk(titanList);
             System.out.println();
             System.out.println("Their respective danger risks: ");
-            for (int i = 0; i < noOfTitans; i++) System.out.printf("Titan %d Risk: %d\n", (i+1), dangerRiskList.get(i));
+            for (int i = 0; i < titanKillQueue.getSize(); i++) System.out.printf("Titan %d Risk: %d\n", titanKillQueue.getElement(i).getIndex(), titanKillQueue.getElement(i).getRisk());
 
-            titanKillQueue = createKillQueue(titanList);
+            for(int i = 0; i < titanKillQueue.getSize(); i++){
+                if(titanKillQueue.getElement(i).getRisk() < 19) break;
+                if(titanKillQueue.getElement(i).equals(new NineTitan("Nine Titan (Beast Titan)"))){
+                    beastTitanExists = true;
+                    break;
+                }
+            }
+
+            System.out.println();
             int maxDangerRisk = titanKillQueue.getElement(0).getRisk();
-            System.out.println();
-            System.out.printf("%s's agility: %d\n%s's strength: %d\n%s's ability to kill titan: %d\n",
-                    name, agility, name, strength, name, ability);
-            System.out.println();
-
             if(maxDangerRisk > ability){
                 System.out.println("ABORT MISSION! RUN FOR YOUR LIFE!!!");
                 break;
             }
             else{
                 System.out.println("Proceed with mission...");
-                System.out.print("Sequence to be killed: ");
+                System.out.print("Sequence to kill: ");
                 System.out.println(killPriority(titanKillQueue));
-                System.out.print("Total distance moved: ");
-                System.out.println(calculateDistance(titanKillQueue));
             }
 
-            System.out.print("Detected ");
+            System.out.println();
+            int currentIndex = titanKillQueue.peek().getIndex();
+//            dangerRiskList.remove(titanKillQueue.getElement(currentIndex).getRisk());
+            titanKillQueue.dequeue();
+//            titanList.remove(currentIndex - 1);
+            System.out.printf("Killed Titan %d", currentIndex);
+            totalDistance += Math.abs(previousIndex - currentIndex);
+            previousIndex = currentIndex;
+            System.out.println();
+            System.out.printf("Current distance travelled: %d", totalDistance);
+            System.out.println();
 
-        }while(moreTitans || );
+            System.out.print("Detected more titans? (y/n) ");
+            scanner.nextLine();
+            char moreTitans = scanner.next().toLowerCase().charAt(0);
+            System.out.println();
 
+            if(moreTitans == 'y'){
+                System.out.print("How many more? ");
+                int extraTitans = scanner.nextInt();
+                System.out.println();
+                System.out.printf("Generating %d more titans\n", extraTitans);
+                for (int i = noOfTitans + 1; i <= noOfTitans + extraTitans; i++) {
+                    Titan titan = Titan.generateTitan();
+                    titan.setIndex(i);
+                    titanKillQueue.enqueue(titan);
+//                    titanList.add(titan);
+                    System.out.printf("Titan %d: %s\n", i, titan);
+                }
+                noOfTitans += extraTitans;
+            }
+
+        }
+
+        System.out.println("Leaving Paradis...");
 
     }
 }
