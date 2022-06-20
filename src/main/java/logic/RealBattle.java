@@ -44,7 +44,7 @@ public class RealBattle extends TitanEvaluationAndKillingPriority{
             System.out.println();
             System.out.println("Titans to be killed");
             for(int i = 0; i < titanKillQueue.getSize(); i++){
-                System.out.printf("Titan %d: %-70s\tRisk: %d\n",
+                System.out.printf("Titan %d: %-70sRisk: %d\n",
                         titanKillQueue.getElement(i).getIndex(),
                         titanKillQueue.getElement(i),
                         titanKillQueue.getElement(i).getRisk());
@@ -70,11 +70,12 @@ public class RealBattle extends TitanEvaluationAndKillingPriority{
             System.out.println();
             titanKillQueue.dequeue();
             System.out.printf("Killed Titan %d", currentIndex);
-            totalDistance += Graph.pathDistance(bestPath);
+            int currentPathLength = Graph.pathDistance(bestPath);
+            totalDistance += currentPathLength;
             previousIndex = currentIndex;
             System.out.println();
-            System.out.printf("Current distance travelled: %d", totalDistance);
-            System.out.println();
+            System.out.printf("Current path length: %d\n", currentPathLength);
+            System.out.printf("Total distance travelled so far: %d\n", totalDistance);
 
             System.out.print("Detected more titans? (y/n) ");
             scanner.nextLine();
@@ -90,7 +91,7 @@ public class RealBattle extends TitanEvaluationAndKillingPriority{
                     Titan titan = Titan.generateTitan();
                     titan.setIndex(i);
                     titanKillQueue.enqueue(titan);
-                    System.out.printf("Titan %d: %-70s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
+                    System.out.printf("Titan %d: %-70sRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
                 }
                 noOfTitans += extraTitans;
             }
