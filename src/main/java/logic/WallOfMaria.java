@@ -9,8 +9,8 @@ public class WallOfMaria {
      * @return the weakest parts of the wall
      */
     public static List<Integer> getWeakestPoints(List<List<Integer>> wallStructure) {
-        Map<Integer, Integer> countMap = new HashMap<>();
-        int max = 0; // the maximum number of edges in one position
+        HashMap<Integer, Integer> countMap = new HashMap<>();
+        int max = 0;
 
         for (List<Integer> edges : wallStructure) {
             for (int edge : edges) {
@@ -23,7 +23,7 @@ public class WallOfMaria {
         }
 
         List<Integer> res = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> entry : countMap.entrySet())
+        for (Entry<Integer, Integer> entry : countMap.entrySet())
             if (entry.getValue() == max)
                 // add the index into the list if it has the maximum number of edges
                 res.add(entry.getKey());
