@@ -2,7 +2,21 @@ package logic;
 
 import java.lang.StringBuilder;
 
+import collections.HashMap;
+
+import java.lang.StringBuilder;
+
 public class WordConverter {
+    public static void main(String[] args) {
+        String marleyText = "rsgc(qqd^i$tkz)$ko$^udzhd,(rld$sgk^z$)$^gpssld";
+        String key = "marley";
+        String encryptedText = encryptText(marleyText, key);
+        String decryptedText = decryptText(encryptedText, key);
+        System.out.println("Marley Text: " + marleyText);
+        System.out.println("Encrypted Text: " + encryptedText);
+        System.out.println("Decrypted Text: " + decryptedText);
+        System.out.println("Paradis Text: " + convertWord(decryptedText));
+    }
     public static String convertWord(String input){
         HashMap<Character, Character> map = new HashMap<>();
         char[] paradis = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '$', ','};

@@ -13,7 +13,6 @@ public class WordConverterController {
     @FXML public void convert(){
         paradisText.setText(WordConverter.convertWord(marleyTextField.getText()));
     }
-
     @FXML public void back(){
         MainGUI.loadScreen(Screen.MENU);
     }
