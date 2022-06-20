@@ -12,21 +12,6 @@ public class HashMap<K, V> {
         return key.hashCode();
     }
 
-    private void resize(){
-        Entry<K, V>[] previousHashMap = buckets;
-        buckets = new Entry[size * 2]; //double the size of array
-        size = 0; //reset the size because put() method will increase the size
-
-        for(int i = 0; i < previousHashMap.length; i++){ //loop through existing hash
-            Entry<K, V> current = previousHashMap[i];
-            if(current == null) continue;
-            while(current != null){
-                put(current.key, current.value);
-                current = current.next;
-            }
-        }
-    }
-
     public void put(K key, V value){
         Entry<K, V> newEntry = new Entry<>(key, value, null);
         int index = getIndex(key) % buckets.length; //get the hash

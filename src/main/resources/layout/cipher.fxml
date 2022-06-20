@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CipherController">
+    <children>
+        <Text layoutX="226.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter a sentence" textAlignment="CENTER">
+            <font>
+                <Font size="20.0" />
+            </font></Text>
+        <TextField fx:id="textField" layoutX="39.0" layoutY="122.0" prefHeight="40.0" prefWidth="536.0">
+            <font>
+                <Font size="18.0" />
+            </font></TextField>
+        <Button fx:id="encryptButton" layoutX="97.0" layoutY="194.0" mnemonicParsing="false" onAction="#encrypt" text="Encrypt">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
+      <Button fx:id="decryptButton" layoutX="378.0" layoutY="194.0" mnemonicParsing="false" onAction="#decrypt" text="Decrypt">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Text fx:id="resultText" fill="#ff4d40" layoutX="14.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="572.0">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Text>
+    </children>
+</AnchorPane>
