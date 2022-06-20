@@ -21,6 +21,33 @@ public class Graph {
         return true;
     }
 
+    public static List<Integer> findPath(List<List<Integer>> graph, int source, int destination) {
+        Queue<List<Integer>> queue = new LinkedList<>();
+
+        List<Integer> path = new ArrayList<>();
+        path.add(source);
+        queue.offer(path);
+
+        List<List<Integer>> solutions = new ArrayList<>();
+
+        while (!queue.isEmpty()) {
+            path = queue.poll();
+            int last = path.get(path.size() - 1);
+            if (last == destination) return path;
+            List<Integer> lastNode = graph.get(last);
+            for (Integer node : lastNode) {
+                if (isNotVisited(node, path)) {
+                    List<Integer> newpath = new ArrayList<>(path);
+                    newpath.add(node);
+                    queue.offer(newpath);
+                }
+            }
+        }
+        return path;
+    }
+
+    public static int pathDistance(List<Integer> path){ return path.size() - 1; }
+
     public static List<List<Integer>> findPaths(List<List<Integer>> graph, int source, int destination) {
         Queue<List<Integer>> queue = new LinkedList<>();
 
