@@ -23,6 +23,16 @@ public class Graph{
             Arrays.asList(6, 9, 14)
     ));
 
+    public static String getNodeType(int index){
+        List<Integer> buildingNodes = new ArrayList<>(Arrays.asList(1, 3, 6, 8, 10, 11, 13)),
+                        titanNodes = new ArrayList<>(Arrays.asList(2, 12, 14)),
+                        treeNodes = new ArrayList<>(Arrays.asList(4, 5, 7, 9, 15));
+        if(buildingNodes.contains(index)) return "Building Node";
+        else if(titanNodes.contains(index)) return "Titan Node";
+        else if(treeNodes.contains(index)) return "Tree Node";
+        else return "Invalid node index";
+    }
+
     public static String printPath(List<Integer> path){
         String direction = "";
         for(Integer v : path) direction += (v + "-->");
