@@ -1,44 +1,13 @@
 package logic;
 
 import collections.PriorityQueue;
+import data_objects.MapOfParadis;
 import data_objects.Titan;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
-public class TitanEvaluationAndKillingPriority {
-    public static List<Integer> evaluateDangerRisk(List<Titan> titans){
-        List<Integer> dangerRisks = new ArrayList<>();
-        for (Titan titan : titans)
-            dangerRisks.add(titan.getRisk());
-        return dangerRisks;
-    }
-
-    public static PriorityQueue<Titan> createKillQueue(List<Titan> titans) {
-        PriorityQueue<Titan> killQueue = new PriorityQueue<>();
-        for (Titan titan : titans)
-            killQueue.enqueue(titan);
-        return killQueue;
-    }
-
-    public static String killPriority(PriorityQueue<Titan> killQueue) {
-        StringBuilder killSequence = new StringBuilder();
-        for (int i = 0; i < killQueue.getSize(); i++)
-            killSequence.append("Titan ")
-                        .append(killQueue.getElement(i).getIndex())
-                        .append(" --> ");
-        return killSequence.substring(0, killSequence.length() - 5);
-    }
-
-    public static int calculateDistance(PriorityQueue<Titan> killQueue) {
-        int totalDistance = 0;
-        int previousIndex = 0;
-        for (int i = 0; i < killQueue.getSize(); i++) {
-            int currentIndex = killQueue.getElement(i).getIndex();
-            totalDistance += Math.abs(previousIndex - currentIndex);
-            previousIndex = currentIndex;
-        }
-        return totalDistance;
-    }
+public class RealBattle extends TitanEvaluationAndKillingPriority{
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -56,6 +25,8 @@ public class TitanEvaluationAndKillingPriority {
         System.out.println();
 
         PriorityQueue<Titan> titanKillQueue = new PriorityQueue<>();
+        Graph graph = new Graph();
+        List<List<Integer>> map = MapOfParadis.MAP;
 
         System.out.print("Initial number of Titans: ");
         int noOfTitans = scanner.nextInt();
@@ -93,6 +64,9 @@ public class TitanEvaluationAndKillingPriority {
 
             System.out.println();
             int currentIndex = titanKillQueue.peek().getIndex();
+            System.out.printf("Best path to get from node %d to node %d: ", previousIndex, currentIndex);
+            System.out.println(Graph.findPath(map, previousIndex, currentIndex));
+            System.out.println();
             titanKillQueue.dequeue();
             System.out.printf("Killed Titan %d", currentIndex);
             totalDistance += Math.abs(previousIndex - currentIndex);
@@ -126,5 +100,5 @@ public class TitanEvaluationAndKillingPriority {
         System.out.println("Leaving Paradis...");
 
     }
-}
 
+}
