@@ -1,27 +1,10 @@
 package logic;
 
+import data_objects.MapOfParadis;
+
 import java.util.*;
 
 public class Graph {
-    public static final List<List<Integer>> MAP_OF_PARADIS = Arrays.asList(
-        Arrays.asList(1, 5, 7),
-        Arrays.asList(0, 2, 4, 6),
-        Arrays.asList(1, 3, 11, 13),
-        Arrays.asList(2, 10),
-        Arrays.asList(1, 6, 10),
-        Arrays.asList(0, 6, 7, 12),
-        Arrays.asList(1, 4, 5, 8, 15),
-        Arrays.asList(0, 5, 9),
-        Arrays.asList(6, 10),
-        Arrays.asList(7, 12, 15),
-        Arrays.asList(3, 4, 8, 14),
-        Arrays.asList(2, 13),
-        Arrays.asList(5, 9),
-        Arrays.asList(2, 11, 14),
-        Arrays.asList(10, 13, 15),
-        Arrays.asList(6, 9, 14)
-    );
-
     public static String printPath(List<Integer> path) {
         StringBuilder direction = new StringBuilder();
         for (Integer v : path) direction.append(v).append("-->");
@@ -176,7 +159,7 @@ public class Graph {
                     point = scanner.nextInt();
 
                     if (point < 0 || point > 15) System.out.println("Starting point not on Map of Paradis");
-                    else findHamiltonianCycle(MAP_OF_PARADIS, 16, point);
+                    else findHamiltonianCycle(MapOfParadis.MAP, 16, point);
                 } while (point < 0 || point > 15);
             } else if (selection == 2) {
                 System.out.print("Enter location of Titan: ");
@@ -187,7 +170,7 @@ public class Graph {
                 // finding shortest path
                 System.out.println("Best path(s):");
                 try {
-                    findPaths(Graph.MAP_OF_PARADIS, 0, location);
+                    findPaths(MapOfParadis.MAP, 0, location);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Location unavailable: not on Map of Paradis");
                 }
