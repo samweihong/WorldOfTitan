@@ -1,3 +1,4 @@
+import data_objects.MapOfParadis;
 import logic.Graph;
 import org.junit.jupiter.api.Test;
 
@@ -9,10 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class GraphTest {
 
-    @Test
+    @Test @SuppressWarnings("ConstantConditions")
     void testFindPaths(){
 
-        List<List<Integer>> map = Graph.mapOfParadis;
+        List<List<Integer>> map = MapOfParadis.MAP;
         
         Queue<Integer> data = getTestData();
         assertNotNull(data);
@@ -26,13 +27,13 @@ class GraphTest {
                 Arrays.asList(0, 5, 6, 15),
                 Arrays.asList(0, 7, 9, 15)
         ), Graph.findPaths(map, 0, data.poll()));
-        assertEquals(Arrays.asList(
+        assertEquals(List.of(
                 Arrays.asList(0, 1)
         ), Graph.findPaths(map, 0, data.poll()));
-        assertEquals(Arrays.asList(
+        assertEquals(List.of(
                 Arrays.asList(0, 5)
         ), Graph.findPaths(map, 0, data.poll()));
-        assertEquals(Arrays.asList(
+        assertEquals(List.of(
                 Arrays.asList(0, 7, 9)
         ), Graph.findPaths(map, 0, data.poll()));
         assertEquals(Arrays.asList(
@@ -42,7 +43,7 @@ class GraphTest {
                 Arrays.asList(0, 5, 6, 15, 14),
                 Arrays.asList(0, 7, 9, 15, 14)
         ), Graph.findPaths(map, 0, data.poll()));
-        assertEquals(Arrays.asList(
+        assertEquals(List.of(
                 Arrays.asList(0, 5, 12)
         ), Graph.findPaths(map, 0, data.poll()));
         assertEquals(Arrays.asList(
