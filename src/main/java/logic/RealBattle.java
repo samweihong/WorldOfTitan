@@ -65,11 +65,12 @@ public class RealBattle extends TitanEvaluationAndKillingPriority{
             System.out.println();
             int currentIndex = titanKillQueue.peek().getIndex();
             System.out.printf("Best path to get from node %d to node %d: ", previousIndex, currentIndex);
-            Graph.findPath(map, previousIndex, currentIndex);
+            List<Integer> bestPath = Graph.findPath(map, previousIndex, currentIndex);
+            System.out.println(Graph.printPath(bestPath));
             System.out.println();
             titanKillQueue.dequeue();
             System.out.printf("Killed Titan %d", currentIndex);
-            totalDistance += Math.abs(previousIndex - currentIndex);
+            totalDistance += Graph.pathDistance(bestPath);
             previousIndex = currentIndex;
             System.out.println();
             System.out.printf("Current distance travelled: %d", totalDistance);

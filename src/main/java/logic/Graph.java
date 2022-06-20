@@ -43,11 +43,10 @@ public class Graph {
                 }
             }
         }
-        printPath(path);
         return path;
     }
 
-    public static int pathDistance(List<Integer> path){ return path.size(); }
+    public static int pathDistance(List<Integer> path){ return path.size() - 1; }
 
     public static List<List<Integer>> findPaths(List<List<Integer>> graph, int source, int destination) {
         Queue<List<Integer>> queue = new LinkedList<>();
