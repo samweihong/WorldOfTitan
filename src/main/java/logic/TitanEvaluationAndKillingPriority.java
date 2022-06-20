@@ -59,8 +59,6 @@ public class TitanEvaluationAndKillingPriority {
                 name, agility, name, strength, name, ability);
         System.out.println();
 
-//        List<Titan> titanList = new ArrayList<>();
-//        Queue<Integer> dangerRiskList = new Queue<>();
         PriorityQueue<Titan> titanKillQueue = new PriorityQueue<>();
         boolean beastTitanExists = false;
 
@@ -73,15 +71,10 @@ public class TitanEvaluationAndKillingPriority {
             Titan titan = Titan.generateTitan();
             titan.setIndex(i);
             titanKillQueue.enqueue(titan);
-//            dangerRiskList.enqueue(titan.getRisk());
-//            titanList.add(titan);
             System.out.printf("Titan %d: %s\n", titan.getIndex(), titan);
         }
-//        titanKillQueue = createKillQueue(titanList);
 
         while(!titanKillQueue.isEmpty()){
-//            titanKillQueue = createKillQueue(titanList);
-//            dangerRiskList = evaluateDangerRisk(titanList);
             System.out.println();
             System.out.println("Their respective danger risks: ");
             for (int i = 0; i < titanKillQueue.getSize(); i++) System.out.printf("Titan %d Risk: %d\n", titanKillQueue.getElement(i).getIndex(), titanKillQueue.getElement(i).getRisk());
@@ -108,9 +101,7 @@ public class TitanEvaluationAndKillingPriority {
 
             System.out.println();
             int currentIndex = titanKillQueue.peek().getIndex();
-//            dangerRiskList.remove(titanKillQueue.getElement(currentIndex).getRisk());
             titanKillQueue.dequeue();
-//            titanList.remove(currentIndex - 1);
             System.out.printf("Killed Titan %d", currentIndex);
             totalDistance += Math.abs(previousIndex - currentIndex);
             previousIndex = currentIndex;
@@ -132,7 +123,6 @@ public class TitanEvaluationAndKillingPriority {
                     Titan titan = Titan.generateTitan();
                     titan.setIndex(i);
                     titanKillQueue.enqueue(titan);
-//                    titanList.add(titan);
                     System.out.printf("Titan %d: %s\n", i, titan);
                 }
                 noOfTitans += extraTitans;
