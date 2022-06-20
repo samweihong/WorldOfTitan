@@ -1,8 +1,11 @@
 package logic;
 
+import data_objects.GameCharacter;
 import data_objects.MapOfParadis;
+import javafx.util.Pair;
 
 import java.util.*;
+import java.util.HashMap;
 
 public class Graph {
     public static String printPath(List<Integer> path) {
@@ -137,6 +140,43 @@ public class Graph {
             if (path.getLast() == target)
                 result.add(path);
         }
+        return result;
+    }
+
+    public static List<Integer> killBeastTitan(GameCharacter gameCharacter, int startIndex, int titanIndex) {
+        int[] labels = new int[MapOfParadis.MAP.size()];
+        Arrays.fill(labels, Integer.MAX_VALUE);
+        labels[startIndex] = MapOfParadis.getTime(gameCharacter, startIndex);
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(Comparator.comparingInt(index -> labels[index]));
+        pq.offer(startIndex);
+
+        Map<Integer, Integer> previousNodeMap = new HashMap<>();
+        previousNodeMap.put(startIndex, null);
+
+        Set<Integer> removedNodes = new HashSet<>();
+
+        while (!pq.isEmpty()) {
+            int current = pq.poll();
+            if (current == titanIndex) break;
+            removedNodes.add(current);
+
+            for (int neighbour : MapOfParadis.MAP.get(current)) {
+                if (removedNodes.contains(neighbour)) continue;
+
+                int newLabel = labels[current] + MapOfParadis.getTime(gameCharacter, neighbour);
+                if (newLabel < labels[neighbour]) {
+                    labels[neighbour] = newLabel;
+                    pq.remove(neighbour);
+                    pq.offer(neighbour);
+                    previousNodeMap.put(neighbour, current);
+                }
+            }
+        }
+
+        LinkedList<Integer> result = new LinkedList<>();
+        for (Integer current = titanIndex; current != null; current = previousNodeMap.get(current))
+            result.addFirst(current);
         return result;
     }
 
