@@ -71,13 +71,20 @@ public class TitanEvaluationAndKillingPriority {
             Titan titan = Titan.generateTitan();
             titan.setIndex(i);
             titanKillQueue.enqueue(titan);
-            System.out.printf("Titan %d: %s\n", titan.getIndex(), titan);
+            System.out.printf("Titan %d: %s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
         }
 
         while(!titanKillQueue.isEmpty()){
             System.out.println();
-            System.out.println("Their respective danger risks: ");
-            for (int i = 0; i < titanKillQueue.getSize(); i++) System.out.printf("Titan %d Risk: %d\n", titanKillQueue.getElement(i).getIndex(), titanKillQueue.getElement(i).getRisk());
+            System.out.println("Titans to be killed");
+            for(int i = 0; i < titanKillQueue.getSize(); i++){
+                System.out.printf("Titan %d: %s\tRisk: %d\n",
+                        titanKillQueue.getElement(i).getIndex(),
+                        titanKillQueue.getElement(i),
+                        titanKillQueue.getElement(i).getRisk());
+            }
+
+            System.out.println();
 
             for(int i = 0; i < titanKillQueue.getSize(); i++){
                 if(titanKillQueue.getElement(i).getRisk() < 19) break;
@@ -123,13 +130,14 @@ public class TitanEvaluationAndKillingPriority {
                     Titan titan = Titan.generateTitan();
                     titan.setIndex(i);
                     titanKillQueue.enqueue(titan);
-                    System.out.printf("Titan %d: %s\n", i, titan);
+                    System.out.printf("Titan %d: %s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
                 }
                 noOfTitans += extraTitans;
             }
 
         }
 
+        System.out.println("Total distance travelled: " + totalDistance);
         System.out.println("Leaving Paradis...");
 
     }
