@@ -13,13 +13,6 @@ public class TitanEvaluationAndKillingPriority {
         return dangerRisks;
     }
 
-    public static PriorityQueue<Titan> createKillQueue(List<Titan> titans) {
-        PriorityQueue<Titan> killQueue = new PriorityQueue<>();
-        for (Titan titan : titans)
-            killQueue.enqueue(titan);
-        return killQueue;
-    }
-
     public static String killPriority(PriorityQueue<Titan> killQueue) {
         StringBuilder killSequence = new StringBuilder();
         for (int i = 0; i < killQueue.getSize(); i++)
@@ -27,17 +20,6 @@ public class TitanEvaluationAndKillingPriority {
                         .append(killQueue.getElement(i).getIndex())
                         .append(" --> ");
         return killSequence.substring(0, killSequence.length() - 5);
-    }
-
-    public static int calculateDistance(PriorityQueue<Titan> killQueue) {
-        int totalDistance = 0;
-        int previousIndex = 0;
-        for (int i = 0; i < killQueue.getSize(); i++) {
-            int currentIndex = killQueue.getElement(i).getIndex();
-            totalDistance += Math.abs(previousIndex - currentIndex);
-            previousIndex = currentIndex;
-        }
-        return totalDistance;
     }
 
     public static void main(String[] args) {
