@@ -71,14 +71,14 @@ public class TitanEvaluationAndKillingPriority {
             Titan titan = Titan.generateTitan();
             titan.setIndex(i);
             titanKillQueue.enqueue(titan);
-            System.out.printf("Titan %d: %s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
+            System.out.printf("Titan %d: %-70s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
         }
 
         while(!titanKillQueue.isEmpty()){
             System.out.println();
             System.out.println("Titans to be killed");
             for(int i = 0; i < titanKillQueue.getSize(); i++){
-                System.out.printf("Titan %d: %s\tRisk: %d\n",
+                System.out.printf("Titan %d: %-70s\tRisk: %d\n",
                         titanKillQueue.getElement(i).getIndex(),
                         titanKillQueue.getElement(i),
                         titanKillQueue.getElement(i).getRisk());
@@ -130,7 +130,7 @@ public class TitanEvaluationAndKillingPriority {
                     Titan titan = Titan.generateTitan();
                     titan.setIndex(i);
                     titanKillQueue.enqueue(titan);
-                    System.out.printf("Titan %d: %s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
+                    System.out.printf("Titan %d: %-70s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
                 }
                 noOfTitans += extraTitans;
             }
