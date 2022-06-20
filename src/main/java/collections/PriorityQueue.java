@@ -27,6 +27,12 @@ public class PriorityQueue<E extends Comparable<E>> extends Queue<E> {
         return list.removeFirst();
     }
 
+
+    @Override
+    public boolean isEmpty() {
+        return list.isEmpty();
+    }
+
     @Override
     public int getSize() { return list.size(); }
 
@@ -39,5 +45,10 @@ public class PriorityQueue<E extends Comparable<E>> extends Queue<E> {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < list.size(); i++) { result.append(list.get(i).toString()).append("\n"); }
         return result.toString();
+    }
+
+    @Override
+    public E peek() {
+        return list.peek();
     }
 }

@@ -2,7 +2,10 @@ package data_objects;
 
 import logic.Utils;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,8 +25,17 @@ public class NineTitan extends Titan {
         WAR_HAMMER_TITAN
     }
 
+    public static Set<Integer> nineTitanIndices = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
     public NineTitan() {
-        this(NineTitanType.values()[new Random().nextInt(NineTitanType.values().length)]);
+        Random random = new Random();
+        int nineTitanIndex = random.nextInt(1, 10);
+        while(!nineTitanIndices.contains(nineTitanIndex)){
+            nineTitanIndex = random.nextInt(1, 10);
+        }
+        this.type = NineTitanType.values()[nineTitanIndex - 1];
+        titanType = TitanType.NINE_TITAN;
+        nineTitanIndices.remove(nineTitanIndex);
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
@@ -33,11 +45,6 @@ public class NineTitan extends Titan {
         Matcher matcher = pattern.matcher(titanInfo);
         matcher.find();
         type = NineTitanType.valueOf(matcher.group(1).toUpperCase().replace(' ', '_'));
-    }
-
-    public NineTitan(NineTitanType type) {
-        titanType = TitanType.NINE_TITAN;
-        this.type = type;
     }
 
     public NineTitanType getType() {
