@@ -2,6 +2,7 @@ package logic;
 
 import collections.PriorityQueue;
 import data_objects.GameCharacter;
+import data_objects.NineTitan;
 import data_objects.Titan;
 
 import java.util.*;
@@ -44,13 +45,13 @@ public class TitanEvaluationAndKillingPriority {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        List<Integer> nineTitans = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
         System.out.print("Choose soldier: ");
         String name = scanner.nextLine();
         int agility = GameCharacterList.getGameCharacter(name).agility();
         int strength = GameCharacterList.getGameCharacter(name).strength();
-        int time = GameCharacterList.getGameCharacter(name)
         int ability = agility + strength;
-        int time
 
         List<Titan> titanList = new ArrayList<>();
         List<Integer> dangerRiskList = new ArrayList<>();
@@ -66,6 +67,7 @@ public class TitanEvaluationAndKillingPriority {
             System.out.printf("Generating %d Titans ...\n", noOfTitans);
             for (int i = 1; i <= noOfTitans; i++) {
                 Titan titan = Titan.generateTitan();
+                if(titan.)
                 titan.setIndex(i);
                 titanList.add(titan);
                 System.out.printf("Titan %d: %s\n", i, titan);
