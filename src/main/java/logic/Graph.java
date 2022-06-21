@@ -258,28 +258,33 @@ public class Graph {
             try {
                 point = scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("Invalid input! Please enter again.\n");
+                System.out.println("Invalid input! Please enter again.");
             }
-
-
-            if (point < 0 || point > 15) System.out.println("Starting point is not on Map of Paradis!");
-            else findHamiltonianCycle(MapOfParadis.MAP, 16, point);
+            if (point < 0 || point > 15) {
+                System.out.println("Starting point is not on the Map of Paradis! Please enter again.");
+                scanner = new Scanner(System.in);
+            } else findHamiltonianCycle(MapOfParadis.MAP, 16, point);
             System.out.println();
         }
     }
 
     public static void startBestPathToKillTitan() {
-        System.out.print("Enter location of Titan: ");
+        System.out.println("Kill the titan using the best path!");
         Scanner scanner = new Scanner(System.in);
 
-        int location = scanner.nextInt();
-
-        // finding shortest path
-        System.out.println("Best path(s):");
-        try {
-            findPaths(MapOfParadis.MAP, 0, location);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Location unavailable: not on Map of Paradis");
+        int location = -1;
+        while (location < 0 || location > 15) {
+            System.out.print("Enter location of Titan: ");
+            try {
+                location = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter again.");
+            }
+            if (location < 0 || location > 15) {
+                System.out.println("Location unavailable - it's not on the Map of Paradis! Please enter again.");
+                scanner = new Scanner(System.in);
+            } else findPaths(MapOfParadis.MAP, 0, location);
+            System.out.println();
         }
     }
 }
