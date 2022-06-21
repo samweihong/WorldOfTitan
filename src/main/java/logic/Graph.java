@@ -223,7 +223,8 @@ public class Graph {
             try{
                 System.out.print("Where will you start? ");
                 startIndex = scanner.nextInt();
-                if(startIndex < 1 || startIndex > 15) valid2 = true;
+                if(startIndex >= 1 && startIndex <= 15) valid2 = true;
+                else System.out.println("Invalid input! Please try again");
             }
             catch (NullPointerException e){
                 System.out.println("Invalid input! Please try again");
@@ -236,14 +237,15 @@ public class Graph {
             try{
                 System.out.print("Where is Beast Titan? ");
                 titanIndex = scanner.nextInt();
-                if(titanIndex < 1 || titanIndex > 15) valid3 = true;
+                if(titanIndex >= 1 && titanIndex <= 15) valid3 = true;
+                else System.out.println("Invalid input! Please try again");
             }
             catch (NullPointerException e){
                 System.out.println("Invalid input! Please try again");
             }
         }
 
-        Graph.killBeastTitan(GameCharacterList.getGameCharacter(name), startIndex, titanIndex);
+        System.out.println(Graph.printPath(Graph.killBeastTitan(GameCharacterList.getGameCharacter(name), startIndex, titanIndex)));
 
     }
 
