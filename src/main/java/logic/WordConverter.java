@@ -7,7 +7,7 @@ import collections.HashMap;
 import java.lang.StringBuilder;
 
 public class WordConverter {
-    public static void main(String[] args) {
+    public static void start() {
         String marleyText = "rsgc(qqd^i$tkz)$ko$^udzhd,(rld$sgk^z$)$^gpssld";
         String key = "marley";
         String encryptedText = encryptText(marleyText, key);

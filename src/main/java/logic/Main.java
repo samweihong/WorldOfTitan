@@ -36,7 +36,8 @@ public class Main {
                     System.out.println();
 
                     switch (choice) {
-//                        case 3 -> Graph.
+                        case 4 -> Graph.startHamiltonianCycle();
+                        case 5 -> Graph.startBestPathToKillTitan();
                         case 7 -> WallOfMaria.start();
                         case 11 -> RealBattle.start();
                         case 12 -> WordConverter.start();

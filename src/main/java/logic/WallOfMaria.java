@@ -52,8 +52,8 @@ public class WallOfMaria {
         return list;
     }
 
-    // Tester method
-    public static void main(String[] args) {
+    public static void start() {
+        System.out.println("What is(are) the weakest part(s) of the wall?");
         List<List<Integer>> input = readInput();
         List<Integer> output = getWeakestPoints(input);
         System.out.println();
@@ -61,5 +61,6 @@ public class WallOfMaria {
             System.out.println("Weakest part of the wall is at position " + output.get(0));
         else
             System.out.println("Weakest parts of the wall are at position " + Utils.formatList(output));
+        System.out.println();
     }
 }

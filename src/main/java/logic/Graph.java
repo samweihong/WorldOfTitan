@@ -81,7 +81,6 @@ public class Graph {
     }
 
     public static void hamiltonianCycle(List<List<Integer>> map, int start, boolean[] visited, List<Integer> path, int n, int s) {
-
         if (path.size() == n && path.get(0) == s && map.get(path.get(15)).contains(s)) {
             System.out.println();
             System.out.println("Path found!");
@@ -100,23 +99,18 @@ public class Graph {
                 path.remove(path.size() - 1);
             }
         }
-
     }
 
     public static void findHamiltonianCycle(List<List<Integer>> map, int n, int s) {
-
         for (int start = 0; start < n; start++) {
-
             List<Integer> path = new ArrayList<>();
             path.add(start);
-
 
             boolean[] visited = new boolean[n];
             visited[start] = true;
 
             hamiltonianCycle(map, start, visited, path, n, s);
         }
-
     }
 
     /**
@@ -207,43 +201,37 @@ public class Graph {
         return result;
     }
 
-    public static void main(String[] args) {
-
+    public static void startHamiltonianCycle() {
+        System.out.println("Finding Hamiltonian cycle...");
         Scanner scanner = new Scanner(System.in);
-        int selection;
-        do {
-            System.out.print("""
-                    Make selection:
-                    1. Find Hamiltonian Cycle
-                    2. Find best path to kill titan
-                                            
-                    Input:  """);
-            selection = scanner.nextInt();
-            int point;
-            if (selection == 1) {
-                do {
-                    System.out.print("Enter starting point: ");
-                    point = scanner.nextInt();
-
-                    if (point < 0 || point > 15) System.out.println("Starting point not on Map of Paradis");
-                    else findHamiltonianCycle(MapOfParadis.MAP, 16, point);
-                } while (point < 0 || point > 15);
-            } else if (selection == 2) {
-                System.out.print("Enter location of Titan: ");
-                int location = scanner.nextInt();
-                scanner.close();
-
-
-                // finding shortest path
-                System.out.println("Best path(s):");
-                try {
-                    findPaths(MapOfParadis.MAP, 0, location);
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Location unavailable: not on Map of Paradis");
-                }
-            } else {
-                System.out.println("Invalid selection!");
+        int point = -1;
+        while (point < 0 || point > 15) {
+            System.out.print("Enter starting point: ");
+            try {
+                point = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter again.\n");
             }
-        } while (selection != 1 && selection != 2);
+
+
+            if (point < 0 || point > 15) System.out.println("Starting point is not on Map of Paradis!");
+            else findHamiltonianCycle(MapOfParadis.MAP, 16, point);
+            System.out.println();
+        }
+    }
+
+    public static void startBestPathToKillTitan() {
+        System.out.print("Enter location of Titan: ");
+        Scanner scanner = new Scanner(System.in);
+
+        int location = scanner.nextInt();
+
+        // finding shortest path
+        System.out.println("Best path(s):");
+        try {
+            findPaths(MapOfParadis.MAP, 0, location);
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Location unavailable: not on Map of Paradis");
+        }
     }
 }
