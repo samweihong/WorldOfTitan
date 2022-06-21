@@ -42,6 +42,7 @@ public class Main {
                         case 7 -> WallOfMaria.start();
                         case 10 -> Graph.startKillBeastTitan();
                         case 11 -> RealBattle.start();
+                        case 12 -> WordConverter.startEncryptDecrypt();
                     }
 
                     System.out.println("(Press Enter to continue...)");

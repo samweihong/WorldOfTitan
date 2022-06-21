@@ -83,6 +83,42 @@ public class WordConverter {
     }
 
 
+    public static void startEncryptDecrypt() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        String key = "";
+        System.out.print("Please input key: ");
+        key = scanner.nextLine();
+
+        System.out.print("Text to be encrypted: ");
+        String text = scanner.nextLine();
+
+        int input = 0;
+        do{
+            System.out.println("""
+            
+            1. Encrypt
+            2. Decrypt
+            Selection: """);
+            input = scanner.nextInt();
+        }while(input != 1 && input != 2);
+
+        if(input == 1){
+            String encryptedText = encryptText(text, key);
+            System.out.println("Encrypted text: " + encryptedText);
+        }
+
+        else if(input == 2){
+            String decryptedText = decryptText(text, key);
+            System.out.println("Decrypted text: " + decryptedText);
+        }
+
+
+
+
+
+    }
     //EXTRA FEATURE --> CIPHER
     public static String encryptText(String str, String key){
         str = str.toUpperCase();
