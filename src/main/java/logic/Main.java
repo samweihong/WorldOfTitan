@@ -33,9 +33,12 @@ public class Main {
                     if (choice == 0) break;
                     if (choice < 0 || choice > 12) throw new IllegalArgumentException();
 
+                    System.out.println("=====================================================================================");
                     System.out.println();
 
                     switch (choice) {
+                        case 1 -> GameCharacterList.startGameCharacterIO();
+                        case 2 -> GameCharacterList.startSortAndSearch();
                         case 3 -> TitanEvaluationAndKillingPriority.start();
                         case 4 -> Graph.startHamiltonianCycle();
                         case 5 -> Graph.startBestPathToKillTitan();
