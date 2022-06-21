@@ -250,6 +250,20 @@ public class Graph {
             }
         }
 
+        int coordination = GameCharacterList.getGameCharacter(name).coordination(),
+            intelligence = GameCharacterList.getGameCharacter(name).intelligence(),
+            agility = GameCharacterList.getGameCharacter(name).agility();
+        System.out.println();
+        System.out.println("Coordination: " + coordination);
+        System.out.println("Time past building node: " + MapOfParadis.getTime(GameCharacterList.getGameCharacter(name), 1));
+        System.out.println();
+        System.out.println("Intelligence: " + intelligence);
+        System.out.println("Time past titan node: " + MapOfParadis.getTime(GameCharacterList.getGameCharacter(name), 2));
+        System.out.println();
+        System.out.println("Agility: " + agility);
+        System.out.println("Time past tree node: " + MapOfParadis.getTime(GameCharacterList.getGameCharacter(name), 4));
+        System.out.println();
+
         int startIndex = 0;
         boolean valid2 = false;
         while(!valid2){
