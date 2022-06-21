@@ -38,9 +38,9 @@ public class Main {
                     switch (choice) {
                         case 4 -> Graph.startHamiltonianCycle();
                         case 5 -> Graph.startBestPathToKillTitan();
+                        case 6 -> WordConverter.startConvertWords();
                         case 7 -> WallOfMaria.start();
                         case 11 -> RealBattle.start();
-                        case 12 -> WordConverter.start();
                     }
 
                     System.out.println("(Press Enter to continue...)");
