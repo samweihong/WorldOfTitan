@@ -40,6 +40,7 @@ public class Main {
                         case 5 -> Graph.startBestPathToKillTitan();
                         case 6 -> WordConverter.startConvertWords();
                         case 7 -> WallOfMaria.start();
+                        case 10 -> Graph.startKillBeastTitan();
                         case 11 -> RealBattle.start();
                     }
 
