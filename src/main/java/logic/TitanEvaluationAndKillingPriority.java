@@ -22,7 +22,39 @@ public class TitanEvaluationAndKillingPriority {
         return killSequence.substring(0, killSequence.length() - 5);
     }
 
+    public static int calculateDistance(PriorityQueue<Titan> killQueue) {
+        int totalDistance = 0;
+        int previousIndex = 0;
+        for (int i = 0; i < killQueue.getSize(); i++) {
+            int currentIndex = killQueue.getElement(i).getIndex();
+            totalDistance += Math.abs(previousIndex - currentIndex);
+            previousIndex = currentIndex;
+        }
+        return totalDistance;
+    }
+
     public static void start() {
+        Scanner scanner = new Scanner(System.in);
+        PriorityQueue<Titan> titanKillQueue = new PriorityQueue<>();
+        System.out.print("Initial number of Titans: ");
+        int noOfTitans = scanner.nextInt();
+
+        System.out.println();
+        System.out.printf("Generating %d Titans ...\n", noOfTitans);
+        for (int i = 1; i <= noOfTitans; i++) {
+            Titan titan = Titan.generateTitan();
+            titan.setIndex(i);
+            titanKillQueue.enqueue(titan);
+            System.out.printf("Titan %d: %-70s\tRisk: %d\n", titan.getIndex(), titan, titan.getRisk());
+        }
+        System.out.println();
+        System.out.print("Sequence to kill: ");
+        System.out.println(killPriority(titanKillQueue));
+        System.out.println();
+        System.out.print("Total distance moved: ");
+        System.out.println(calculateDistance(titanKillQueue));
+    }
+    public static void startAdvanced() {
         Scanner scanner = new Scanner(System.in);
         String name = "";
         boolean valid = false;

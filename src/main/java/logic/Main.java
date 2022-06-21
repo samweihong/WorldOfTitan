@@ -36,11 +36,12 @@ public class Main {
                     System.out.println();
 
                     switch (choice) {
+                        case 3 -> TitanEvaluationAndKillingPriority.start();
                         case 4 -> Graph.startHamiltonianCycle();
                         case 5 -> Graph.startBestPathToKillTitan();
                         case 6 -> WordConverter.startConvertWords();
                         case 7 -> WallOfMaria.start();
-                        case 8 -> TitanEvaluationAndKillingPriority.start();
+                        case 8 -> TitanEvaluationAndKillingPriority.startAdvanced();
                         case 9 -> Graph.startKillMovingTitan();
                         case 10 -> Graph.startKillBeastTitan();
                         case 11 -> RealBattle.start();
