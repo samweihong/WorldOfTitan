@@ -1,3 +1,5 @@
+package logic;
+
 import logic.WordConverter;
 import org.junit.jupiter.api.Test;
 
