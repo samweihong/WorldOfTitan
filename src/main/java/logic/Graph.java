@@ -121,13 +121,40 @@ public class Graph {
      * @return a list of the shortest paths to kill a moving titan
      */
     public static LinkedList<LinkedList<Integer>> killMovingTitan(List<List<Integer>> map, int[] titanPath, int startNode) {
-        for (int steps = 1; ; steps++) {
+        for (int steps = 0; ; steps++) {
             int target = titanPath[Math.min(steps/2, titanPath.length-1)];
             LinkedList<LinkedList<Integer>> result = killMovingTitan(map, startNode, target, steps);
             if (!result.isEmpty()) return result;
         }
     }
 
+    public static void startKillMovingTitan() {
+        Scanner scanner = new Scanner(System.in);
+
+        int pathLength = 0;
+        boolean valid = false;
+        while(!valid){
+            try{
+                System.out.print("What is the Titan's path length? ");
+                pathLength = scanner.nextInt();
+                if(pathLength != 0) valid = true;
+            }
+            catch (InputMismatchException e){
+                System.out.println("Invalid input! Please try again");
+            }
+        }
+
+        int[] path = new int[pathLength + 1];
+        System.out.printf("Please input %d numbers: ", pathLength + 1);
+        for(int i = 0; i < pathLength + 1; i++) path[i] = scanner.nextInt();
+
+        System.out.print("Where will you begin? ");
+        int startIndex = scanner.nextInt();
+
+        System.out.print("Path to kill moving Titan: ");
+        System.out.println(killMovingTitan(MapOfParadis.MAP, path, startIndex));
+
+    }
     /**
      * Returns a list of paths where the titan can be killed in the specified steps.
      * @param map the graph represented as adjacency list
@@ -141,7 +168,7 @@ public class Graph {
         q.offer(new LinkedList<>(List.of(start)));
 
         // Search for all paths with the length of specified steps
-        for (int i = 0; i <= steps; i++) {
+        for (int i = 1; i <= steps; i++) {
             for (int size = q.size(); size > 0; size--) {
                 LinkedList<Integer> currentPath = q.poll();
                 @SuppressWarnings("ConstantConditions")
