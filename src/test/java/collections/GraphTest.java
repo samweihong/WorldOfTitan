@@ -1,3 +1,5 @@
+package collections;
+
 import data_objects.MapOfParadis;
 import logic.Graph;
 import org.junit.jupiter.api.Test;
@@ -5,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.Queue;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +18,7 @@ class GraphTest {
 
         List<List<Integer>> map = MapOfParadis.MAP;
         
-        Queue<Integer> data = getTestData();
+        java.util.Queue<Integer> data = getTestData();
         assertNotNull(data);
 
         assertEquals(Arrays.asList(
@@ -54,7 +57,7 @@ class GraphTest {
 
     }
 
-    private Queue<Integer> getTestData() {
+    private java.util.Queue<Integer> getTestData() {
         Queue<Integer> data = new ArrayDeque<>();
         try (Scanner input = new Scanner(new FileInputStream("src/test/resources/test-data/bestPathToKillTitanTest.txt"))) {
             while (input.hasNextInt()) {

@@ -2,7 +2,6 @@ package logic;
 
 import data_objects.GameCharacter;
 import data_objects.MapOfParadis;
-import javafx.util.Pair;
 
 import java.util.*;
 import java.util.HashMap;
@@ -228,6 +227,13 @@ public class Graph {
         return result;
     }
 
+    public static int getTotalTime(GameCharacter character, List<Integer> path) {
+        int time = 0;
+        for (int i = 0; i < path.size()-1; i++)
+            time += MapOfParadis.getTime(character, path.get(i));
+        return time;
+    }
+
     public static void startKillBeastTitan() {
         Scanner scanner = new Scanner(System.in);
 
@@ -272,8 +278,9 @@ public class Graph {
             }
         }
 
-        System.out.println(Graph.printPath(Graph.killBeastTitan(GameCharacterList.getGameCharacter(name), startIndex, titanIndex)));
-
+        List<Integer> path = Graph.killBeastTitan(GameCharacterList.getGameCharacter(name), startIndex, titanIndex);
+        System.out.println("Shortest path taken: " + Graph.printPath(path));
+        System.out.println("Total time taken: " + Graph.getTotalTime(GameCharacterList.getGameCharacter(name), path));
     }
 
     public static void startHamiltonianCycle() {
