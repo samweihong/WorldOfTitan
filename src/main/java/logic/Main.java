@@ -39,6 +39,7 @@ public class Main {
                         case 4 -> Graph.startHamiltonianCycle();
                         case 5 -> Graph.startBestPathToKillTitan();
                         case 7 -> WallOfMaria.start();
+                        case 10 -> Graph.killBeastTitan();
                         case 11 -> RealBattle.start();
                         case 12 -> WordConverter.start();
                     }

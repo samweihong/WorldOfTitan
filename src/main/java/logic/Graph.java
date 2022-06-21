@@ -201,6 +201,52 @@ public class Graph {
         return result;
     }
 
+    public static void startKillBeastTitan() {
+        Scanner scanner = new Scanner(System.in);
+
+        String name = "";
+        boolean valid1 = false;
+        while(!valid1){
+            try{
+                System.out.print("Choose soldier: ");
+                name = scanner.nextLine();
+                if(GameCharacterList.getGameCharacter(name).name().equals(name)) valid1 = true;
+            }
+            catch (NullPointerException e){
+                System.out.println("Invalid input! Please try again");
+            }
+        }
+
+        int startIndex = 0;
+        boolean valid2 = false;
+        while(!valid2){
+            try{
+                System.out.print("Where will you start? ");
+                startIndex = scanner.nextInt();
+                if(startIndex < 1 || startIndex > 15) valid2 = true;
+            }
+            catch (NullPointerException e){
+                System.out.println("Invalid input! Please try again");
+            }
+        }
+
+        int titanIndex = 0;
+        boolean valid3 = false;
+        while(!valid3){
+            try{
+                System.out.print("Where is Beast Titan? ");
+                titanIndex = scanner.nextInt();
+                if(titanIndex < 1 || titanIndex > 15) valid3 = true;
+            }
+            catch (NullPointerException e){
+                System.out.println("Invalid input! Please try again");
+            }
+        }
+
+        Graph.killBeastTitan(GameCharacterList.getGameCharacter(name), startIndex, titanIndex);
+
+    }
+
     public static void startHamiltonianCycle() {
         System.out.println("Finding Hamiltonian cycle...");
         Scanner scanner = new Scanner(System.in);
