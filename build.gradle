@@ -1,7 +1,5 @@
 plugins {
     id 'java'
-    id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 group 'org.example'
@@ -18,12 +16,6 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
 }
 
-javafx {
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 test {
     useJUnitPlatform()
 }
-
-mainClassName = 'gui.MainGUI'
