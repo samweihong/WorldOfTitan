@@ -22,7 +22,7 @@ public class TitanEvaluationAndKillingPriority {
         return killSequence.substring(0, killSequence.length() - 5);
     }
 
-    public static void main(String[] args) {
+    public static void start() {
         Scanner scanner = new Scanner(System.in);
         String name = "";
         boolean valid = false;
