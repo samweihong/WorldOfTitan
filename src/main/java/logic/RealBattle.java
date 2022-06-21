@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class RealBattle extends TitanEvaluationAndKillingPriority{
 
-    public static void main(String[] args) {
+    public static void start() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Choose soldier: ");
